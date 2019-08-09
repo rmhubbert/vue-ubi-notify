@@ -1,4 +1,11 @@
 const Util = {
+  /**
+   * Recursively merge Objects together. Used for merging Vue config files
+   * Doesn't merge arrays, will copy it over without merging into the contents
+   * @param  {Object} target The base object to merge onto
+   * @param  {Object} merge  The object to merge from
+   * @return {Object}        The merged object
+   */
   mergeObjects: (target, merge) => {
     let merged = Object.assign({}, target);
     if (Util.isObject(target) && Util.isObject(merge)) {
@@ -14,12 +21,23 @@ const Util = {
     return merged;
   },
 
+  /**
+   * Checks if the parameter is an Object
+   * @param  {Mixed} target The parameter to test
+   * @return {Boolean}
+   */
   isObject: target => {
     return (
       target && typeof target === "object" && target.constructor === Object
     );
   },
 
+  /**
+   * Constructs a valid CSS positioning string from a config string
+   * @param  {String} positionString Config provided string that can be either exact position or keywords
+   * @param  {String} elementWidth   Needed for when the horizontal value is 'center'
+   * @return {String}                A valid CSS string for adding to a style attribute
+   */
   getCSSPosition: (positionString, elementWidth) => {
     if (positionString.search(":") !== -1) {
       // user has passed a precise position, return as is

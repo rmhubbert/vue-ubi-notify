@@ -9,9 +9,6 @@ const UbiNotify = {
     // Register component
     Vue.component(UbiNotifyComponent.name, UbiNotifyComponent);
 
-    // Add message registry to the Vue instance
-    //Vue.prototype.$UbiNotifiers = UbiNotify.notifiers;
-
     // Add the notify method to the Vue instance
     Vue.prototype.$notify = UbiNotify.notify;
 
