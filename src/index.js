@@ -3,9 +3,13 @@ import Util from "./utils";
 import Config from "./configs";
 
 const UbiNotify = {
+  installed: false,
   notifiers: [],
 
   install: (Vue, options = null) => {
+    if (UbiNotify.installed) return;
+    UbiNotify.installed = true;
+
     // Register component
     Vue.component(UbiNotifyComponent.name, UbiNotifyComponent);
 
