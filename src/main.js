@@ -6,15 +6,15 @@ Vue.config.productionTip = false;
 import UbiNotify from "./index.js";
 
 const config = {
-  name: "config",
-  duration: 3000,
-  parentNode: "content-wrapper"
+  name: "config"
 };
 
 const config2 = {
   name: "config2",
   width: "20vw",
-  position: "top center"
+  position: "bottom right",
+  duration: 3000,
+  parentNode: "content-wrapper"
 };
 
 Vue.use(UbiNotify, [config, config2]);

@@ -7,5 +7,5 @@ export default {
   reverse: false,
   clickToRemove: true,
   defaultNotificationType: "standard",
-  transitionName: "ubi-notify"
+  transitionName: "ubi-notify-transition"
 };

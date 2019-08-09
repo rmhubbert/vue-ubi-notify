@@ -190,19 +190,19 @@ export default {
   width: 15vw;
 }
 
-.ubi-notify-root-top-left {
+.ubi-notify-root-top-left, .ubi-notify-root-left-top {
   top: 0;
   left: 0;
 }
-.ubi-notify-root-top-right {
+.ubi-notify-root-top-right, .ubi-notify-root-right-top {
   top: 0;
   right: 0;
 }
-.ubi-notify-root-bottom-left {
+.ubi-notify-root-bottom-left, .ubi-notify-root-left-bottom {
   bottom: 0;
   left: 0;
 }
-.ubi-notify-root-bottom-right {
+.ubi-notify-root-bottom-right, .ubi-notify-root-right-bottom {
   bottom: 0;
   right: 0;
 }
