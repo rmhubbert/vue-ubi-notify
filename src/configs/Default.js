@@ -1,7 +1,7 @@
 export default {
   name: "default",
   position: "top right",
-  width: "15vw",
+  width: "",
   parentNode: null,
   duration: 5000,
   reverse: false,

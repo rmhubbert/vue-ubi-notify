@@ -14,7 +14,7 @@ const config = {
 const config2 = {
   name: "config2",
   width: "20vw",
-  position: "bottom right"
+  position: "top center"
 };
 
 Vue.use(UbiNotify, [config, config2]);

@@ -1,5 +1,5 @@
 <template>
-  <div :style="wrapperStyle">
+  <div :class="compCssClass" :style="inlineCss" ref="root">
     <transition-group appear :name="transitionName" tag="div">
       <div v-for="notification in notifications" :key="notification.id">
         <div style="background-color: #ccc;">
@@ -13,7 +13,6 @@
 
 <script>
 import DefaultConfig from "../configs/Default.js";
-import Util from "../utils";
 import UbiSleep from "../mixins/UbiSleep.js";
 
 export default {
@@ -73,17 +72,28 @@ export default {
   data() {
     return {
       notifications: [],
-      count: 0
+      count: 0,
+      useInlineCss: false,
+      inlineCss: ""
     };
   },
 
   computed: {
-    wrapperStyle() {
-      return `position: absolute; ${this.calculatePosition} width: ${this.width};`;
+    compCssClass() {
+      if (this.useInlinePosition) return `ubi-notify-root`;
+      const position = this.position.replace(" ", "-");
+      return `ubi-notify-root ubi-notify-root-${position}`;
     },
 
-    calculatePosition() {
-      return Util.getCSSPosition(this.position, this.width);
+    useInlinePosition() {
+      return (
+        this.position.search(":") !== -1 ||
+        this.position.toLowerCase().search("center") !== -1
+      );
+    },
+
+    useInlineWidth() {
+      return this.width !== "";
     }
   },
 
@@ -115,11 +125,85 @@ export default {
 
     manuallyRemoveNotification(id) {
       if (this.clickToRemove) this.removeNotification(id);
+    },
+
+    calcInlineCss() {
+      let css = "";
+      if (this.useInlinePosition) {
+        css += this.calcPosition() + " ";
+      }
+      if (this.useInlineWidth) css += `width: ${this.width};`;
+      this.inlineCss = css;
+      console.log(css);
+    },
+
+    calcPosition() {
+      const words = this.position.toLowerCase().split(" ");
+      let positionStyle = "";
+      words.forEach((word, index) => {
+        if (["top", "bottom", "left", "right"].indexOf(word) != -1) {
+          positionStyle += `${word}: 0; `;
+        } else if (word === "center") {
+          if (index === 0) {
+            // vertically center
+            let height = null;
+            if (this.useInlineheight) height = this.height;
+            else height = getComputedStyle(this.$refs["root"]).height;
+            const numericHeight = parseFloat(height.match(/[\d.]+/));
+            const heightType = height.replace(/[\d.]+/, "");
+            const marginTop = `-${numericHeight / 2}${heightType}`;
+            positionStyle += `top: 50%; margin-top:${marginTop}; `;
+          } else if (index === 1) {
+            // horizontally center
+            let width = null;
+            if (this.useInlineWidth) width = this.width;
+            else width = getComputedStyle(this.$refs["root"]).width;
+            const numericWidth = parseFloat(width.match(/[\d.]+/));
+            const widthType = width.replace(/[\d.]+/, "");
+            const marginLeft = `-${numericWidth / 2}${widthType}`;
+            positionStyle += `left: 50%; margin-left:${marginLeft}; `;
+          }
+        }
+      });
+      return positionStyle;
+    },
+
+    onResize() {
+      this.calcInlineCss();
     }
+  },
+
+  mounted() {
+    this.calcInlineCss();
+    window.addEventListener("resize", this.onResize);
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onResize);
   }
 };
 </script>
 
-<style lang="scss">
-@import "../assets/scss/ubi-notify.scss";
+<style lang="css">
+.ubi-notify-root {
+  position: absolute;
+  width: 15vw;
+}
+
+.ubi-notify-root-top-left {
+  top: 0;
+  left: 0;
+}
+.ubi-notify-root-top-right {
+  top: 0;
+  right: 0;
+}
+.ubi-notify-root-bottom-left {
+  bottom: 0;
+  left: 0;
+}
+.ubi-notify-root-bottom-right {
+  bottom: 0;
+  right: 0;
+}
 </style>
