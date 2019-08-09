@@ -1,7 +1,6 @@
 export default {
   computed: {
     compCssClass() {
-      if (this.useInlinePosition) return `ubi-notify-root`;
       const position = this.position.replace(" ", "-");
       return `ubi-notify-root ubi-notify-root-${position}`;
     },

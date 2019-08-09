@@ -1,5 +1,6 @@
 export default {
   name: "default",
+  cssFramework: "default",
   position: "top right",
   width: "",
   parentNode: null,

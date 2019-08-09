@@ -27,6 +27,12 @@ export default {
       default: DefaultConfig.name
     },
 
+    cssFramework: {
+      type: String,
+      required: false,
+      default: DefaultConfig.cssFramework
+    },
+
     position: {
       type: String,
       required: false,
@@ -130,7 +136,6 @@ export default {
 <style lang="css">
 .ubi-notify-root {
   position: absolute;
-  width: 15vw;
 }
 
 .ubi-notify-root-top-left, .ubi-notify-root-left-top {
