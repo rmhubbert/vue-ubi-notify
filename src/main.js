@@ -12,8 +12,9 @@ const config = {
 const config2 = {
   name: "config2",
   width: "20vw",
+  reverse: true,
   position: "bottom right",
-  duration: 3000,
+  duration: 10000,
   parentNode: "content-wrapper"
 };
 

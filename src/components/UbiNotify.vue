@@ -1,11 +1,13 @@
 <template>
   <div :class="compCssClass" :style="inlineCss" ref="root">
     <transition-group appear :name="transitionName" tag="div">
-      <div v-for="notification in notifications" :key="notification.id">
-        <div style="background-color: #ccc;">
-          <p>{{ notification.heading }}</p>
-          <p>{{ notification.body }}</p>
-        </div>
+      <div v-for="notify in notifications" :key="notify.id">
+        <component
+          :is="notificationComponent"
+          v-bind="notification"
+          :notification="notify"
+          @remove="manuallyRemoveNotification"
+        />
       </div>
     </transition-group>
   </div>
@@ -15,10 +17,13 @@
 import DefaultConfig from "../configs/Default.js";
 import UbiSleep from "../mixins/UbiSleep.js";
 import UbiNotifyCss from "../mixins/UbiNotifyCss.js";
+import DefaultNotification from "./DefaultNotification";
 
 export default {
   name: "UbiNotify",
-  components: {},
+  components: {
+    DefaultNotification
+  },
   mixins: [UbiSleep, UbiNotifyCss],
   props: {
     name: {
@@ -73,6 +78,14 @@ export default {
       type: String,
       required: false,
       default: DefaultConfig.transitionName
+    },
+
+    notification: {
+      type: Object,
+      required: false,
+      default() {
+        return DefaultConfig.notification;
+      }
     }
   },
 
@@ -85,7 +98,11 @@ export default {
     };
   },
 
-  computed: {},
+  computed: {
+    notificationComponent() {
+      return "DefaultNotification";
+    }
+  },
 
   methods: {
     addNotification(body, heading = null, type = null, duration = null) {

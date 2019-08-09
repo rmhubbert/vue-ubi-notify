@@ -8,5 +8,12 @@ export default {
   reverse: false,
   clickToRemove: true,
   defaultNotificationType: "standard",
-  transitionName: "ubi-notify-transition"
+  transitionName: "ubi-notify-transition",
+  notification: {
+    showProgressBar: false,
+    progressBar: {
+      type: "css",
+      updateInterval: 10
+    }
+  }
 };
