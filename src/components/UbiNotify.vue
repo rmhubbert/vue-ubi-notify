@@ -134,7 +134,6 @@ export default {
       }
       if (this.useInlineWidth) css += `width: ${this.width};`;
       this.inlineCss = css;
-      console.log(css);
     },
 
     calcPosition() {
