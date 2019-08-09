@@ -1,3 +1,4 @@
+<script>
 export default {
   methods: {
     sleep(duration) {
@@ -10,3 +11,4 @@ export default {
     }
   }
 };
+</script>

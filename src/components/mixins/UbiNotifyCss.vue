@@ -1,3 +1,4 @@
+<script>
 export default {
   computed: {
     compCssClass() {
@@ -57,3 +58,4 @@ export default {
     }
   }
 };
+</script>

@@ -30,6 +30,21 @@ const Util = {
     return (
       target && typeof target === "object" && target.constructor === Object
     );
+  },
+
+  /**
+   * Converts a string to Pascal case
+   * @param  {String} str String to convert
+   * @return {String}     Converted string
+   */
+  toPascalCase: str => {
+    return str
+      .toLowerCase()
+      .split(" ")
+      .map(function(word) {
+        return word.replace(word[0], word[0].toUpperCase());
+      })
+      .join("");
   }
 };
 

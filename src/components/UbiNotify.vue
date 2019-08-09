@@ -15,16 +15,15 @@
 
 <script>
 import DefaultConfig from "../configs/Default.js";
-import UbiSleep from "../mixins/UbiSleep.js";
-import UbiNotifyCss from "../mixins/UbiNotifyCss.js";
-import DefaultNotification from "./DefaultNotification";
+import UbiSleep from "./mixins/UbiSleep";
+import UbiNotifyCss from "./mixins/UbiNotifyCss";
+import DynamicComponentImporter from "./DynamicComponentImporter";
+import Utils from "../utils";
 
 export default {
   name: "UbiNotify",
-  components: {
-    DefaultNotification
-  },
-  mixins: [UbiSleep, UbiNotifyCss],
+  components: {},
+  mixins: [UbiSleep, UbiNotifyCss, DynamicComponentImporter],
   props: {
     name: {
       type: String,
@@ -94,13 +93,22 @@ export default {
       notifications: [],
       count: 0,
       useInlineCss: false,
-      inlineCss: ""
+      inlineCss: "",
+      componentImportPath: "./"
     };
   },
 
   computed: {
     notificationComponent() {
-      return "DefaultNotification";
+      const notificationComponentName = `${Utils.toPascalCase(
+        this.cssFramework
+      )}Notification`;
+      return this.getComponent(
+        notificationComponentName,
+        this.componentImportPath,
+        notificationComponentName + ".vue"
+      );
+      //return notificationComponentName;
     }
   },
 

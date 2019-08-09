@@ -4,11 +4,11 @@
     @click="$emit('remove', notification.id)"
   >
     <div class="ubi-notify-notification-heading" v-if="notification.heading">
-      {{ notification.heading }}
+      <p>{{ notification.heading }}</p>
     </div>
 
     <div class="ubi-notify-notification-body">
-      {{ notification.body }}
+      <p>{{ notification.body }}</p>
     </div>
   </div>
 </template>
