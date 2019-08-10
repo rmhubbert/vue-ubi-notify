@@ -387,7 +387,8 @@ export default {
 
     selectWrapperClass() {
       if (this.cssFramework === "default") return "ubi-notify-select-wrapper";
-      else if (this.cssFramework === "bulma") return "select is-primary";
+      else if (this.cssFramework === "bulma")
+        return "select is-primary is-fullwidth";
       else if (this.cssFramework === "bootstrap") return "";
       return "";
     },
