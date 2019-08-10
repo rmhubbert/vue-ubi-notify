@@ -28,8 +28,8 @@
                 <option value="success" :selected="type == 'success'"
                   >Success</option
                 >
-                <option value="failure" :selected="type == 'failure'"
-                  >Failure</option
+                <option value="danger" :selected="type == 'danger'"
+                  >Danger</option
                 >
                 <option value="warning" :selected="type == 'warning'"
                   >Warning</option
@@ -152,7 +152,7 @@ export default {
 
     changeStyleSheet() {
       window.location.assign(
-        window.location.pathname + "?css=" + this.cssFramework
+        `${window.location.pathname}?css=${this.cssFramework}&type=${this.type}`
       );
       //document.getElementById("remote-style").href = this.styleSheet;
     }
@@ -163,6 +163,8 @@ export default {
     let params = new URLSearchParams(uri);
     if (params.get("css")) this.cssFramework = params.get("css");
     else this.cssFramework = "default";
+    if (params.get("type")) this.type = params.get("type");
+    else this.type = "default";
 
     const framework = this.cssFrameworkUrls.filter(framework => {
       return framework.name === this.cssFramework;

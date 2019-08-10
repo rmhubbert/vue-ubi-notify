@@ -68,7 +68,7 @@ export default {
   color: hsl(0, 0%, 45%);
 }
 
-.ubi-notify-notification-secondary {
+.ubi-notify-notification-info {
   background-color: hsl(0, 0%, 90%);
   color: hsl(0, 0%, 40%);
 }
@@ -78,7 +78,7 @@ export default {
   color: hsl(0, 0%, 50%);
 }
 
-.ubi-notify-notification-failure {
+.ubi-notify-notification-danger {
   background-color: hsl(348, 100%, 90%);
   color: hsl(0, 0%, 50%);
 }

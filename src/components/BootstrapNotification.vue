@@ -41,6 +41,9 @@ export default {
     notificationType() {
       let cssClass = "";
       switch (this.notification.type) {
+        case "default":
+          cssClass = "bg-secondary";
+          break;
         case "primary":
           cssClass = "bg-primary";
           break;
@@ -50,7 +53,7 @@ export default {
         case "success":
           cssClass = "bg-success";
           break;
-        case "failure":
+        case "danger":
           cssClass = "bg-danger";
           break;
         case "warning":

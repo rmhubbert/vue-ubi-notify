@@ -34,7 +34,7 @@ export default {
         case "success":
           cssClass = "is-success";
           break;
-        case "failure":
+        case "danger":
           cssClass = "is-danger";
           break;
         case "warning":
