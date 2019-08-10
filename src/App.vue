@@ -1,6 +1,6 @@
 <template>
   <main id="content">
-    <h1 class="title">UbiNotify</h1>
+    <h1 class="title">Vue-UbiNotify</h1>
     <p>
       Lightweight. Easy to use. Highly configurable.
     </p>
