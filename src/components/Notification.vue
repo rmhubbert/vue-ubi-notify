@@ -14,18 +14,6 @@ export default {
       type: Boolean,
       required: false,
       default: true
-    },
-    showProgressBar: {
-      type: Boolean,
-      required: false,
-      default: false
-    },
-    progressBar: {
-      type: Object,
-      required: false,
-      default() {
-        return {};
-      }
     }
   }
 };

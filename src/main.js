@@ -4,6 +4,10 @@ let cssFramework = "default";
 if (params.get("css")) cssFramework = params.get("css");
 let position = "top right";
 if (params.get("position")) position = params.get("position");
+let animEnter = "";
+if (params.get("animEnter")) animEnter = params.get("animEnter");
+let animLeave = "";
+if (params.get("animLeave")) animLeave = params.get("animLeave");
 let reverse = false;
 if (
   position === "bottom right" ||
@@ -33,8 +37,12 @@ const config = {
   position: position,
   duration: 7000,
   parentNode: "content-wrapper",
-  cssFramework: cssFramework
+  cssFramework: cssFramework,
+  transitionEnterActiveClass: animEnter,
+  transitionLeaveActiveClass: animLeave
 };
+
+//console.log(config);
 
 Vue.use(UbiNotify, [config]);
 

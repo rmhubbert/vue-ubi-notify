@@ -1,6 +1,17 @@
 <template>
   <div :class="compCssClass" :style="inlineCss" ref="root">
-    <transition-group appear :name="transitionName" tag="div">
+    <transition-group
+      appear
+      :name="transitionName"
+      :enter-class="transitionEnterClass"
+      :enter-active-class="transitionEnterActiveClass"
+      :enter-to-class="transitionEnterToClass"
+      :leave-class="transitionLeaveClass"
+      :leave-active-class="transitionLeaveActiveClass"
+      :leave-to-class="transitionLeaveToClass"
+      :move-class="transitionMoveClass"
+      tag="div"
+    >
       <div v-for="notify in notifications" :key="notify.id">
         <component
           :is="notificationComponent"
@@ -30,55 +41,82 @@ export default {
       required: false,
       default: DefaultConfig.name
     },
-
     cssFramework: {
       type: String,
       required: false,
       default: DefaultConfig.cssFramework
     },
-
     position: {
       type: String,
       required: false,
       default: DefaultConfig.position
     },
-
     width: {
       type: String,
       required: false,
       default: DefaultConfig.width
     },
-
     duration: {
       type: Number,
       required: false,
       default: DefaultConfig.duration
     },
-
     reverse: {
       type: Boolean,
       required: false,
       default: DefaultConfig.reverse
     },
-
     defaultNotificationType: {
       type: String,
       required: false,
       default: DefaultConfig.defaultNotificationType
     },
-
     transitionName: {
       type: String,
       required: false,
       default: DefaultConfig.transitionName
     },
-
     notification: {
       type: Object,
       required: false,
       default() {
         return DefaultConfig.notification;
       }
+    },
+    transitionEnterClass: {
+      type: String,
+      required: false,
+      default: DefaultConfig.transitionEnterClass
+    },
+    transitionEnterActiveClass: {
+      type: String,
+      required: false,
+      default: DefaultConfig.transitionEnterActiveClass
+    },
+    transitionEnterToClass: {
+      type: String,
+      required: false,
+      default: DefaultConfig.transitionEnterToClass
+    },
+    transitionLeaveClass: {
+      type: String,
+      required: false,
+      default: DefaultConfig.transitionLeaveClass
+    },
+    transitionLeaveActiveClass: {
+      type: String,
+      required: false,
+      default: DefaultConfig.transitionLeaveActiveClass
+    },
+    transitionLeaveToClass: {
+      type: String,
+      required: false,
+      default: DefaultConfig.transitionLeaveToClass
+    },
+    transitionMoveClass: {
+      type: String,
+      required: false,
+      default: DefaultConfig.transitionMoveClass
     }
   },
 
@@ -152,26 +190,7 @@ export default {
 };
 </script>
 
-<style lang="css">
-.ubi-notify-root {
-  position: fixed;
-  width: 20vw;
-}
-
-.ubi-notify-root-top-left, .ubi-notify-root-left-top {
-  top: 0;
-  left: 0;
-}
-.ubi-notify-root-top-right, .ubi-notify-root-right-top {
-  top: 0;
-  right: 0;
-}
-.ubi-notify-root-bottom-left, .ubi-notify-root-left-bottom {
-  bottom: 0;
-  left: 0;
-}
-.ubi-notify-root-bottom-right, .ubi-notify-root-right-bottom {
-  bottom: 0;
-  right: 0;
-}
+<style lang="scss">
+@import "../assets/scss/Global.scss";
+@import "../assets/scss/GlobalAnimations.scss";
 </style>

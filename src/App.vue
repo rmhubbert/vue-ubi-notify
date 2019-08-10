@@ -159,6 +159,7 @@
     </div>
 
     <div class="code-wrapper">
+      <p>Add the following specially compiled config to your main Vue file.</p>
       <pre>
 import UbiNotify from "vue-ubi-notify";
 
@@ -167,8 +168,7 @@ const UbiNotifyConfig = {
   position: "{{ position }}",
   reverse: {{ compReverse }},
   cssFramework: "{{ cssFramework }}",
-  iconLibrary: "{{ iconLibrary }}",
-  animationLibrary: "{{ animationLibrary }}"
+  iconLibrary: "{{ iconLibrary }}",{{ calcAnimation() }}
 }
 
 Vue.use(UbiNotify, UbiNotifyConfig);
@@ -184,6 +184,7 @@ export default {
   components: {},
   data() {
     return {
+      config: this.buildConfig(),
       types: ["Default", "Primary", "Info", "Success", "Danger", "Warning"],
       type: "default",
       positions: [
@@ -248,50 +249,88 @@ export default {
         {
           id: "default",
           name: "UbiNotify default",
+          url:
+            location.protocol +
+            "//" +
+            location.host +
+            location.pathname +
+            "css/default.css",
           presets: [
             {
               id: "fade",
-              name: "Fade: in / out"
+              name: "Fade: in / out",
+              inClass: "ubi-notify-transition-fade-in",
+              outClass: "ubi-notify-transition-fade-out"
             }
           ]
         },
         {
           id: "animate.css",
           name: "Animate.css",
+          url:
+            "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css",
           presets: [
             {
               id: "fade",
-              name: "Fade: in / out"
+              name: "Fade: in / out",
+              inClass: "animated fadeIn",
+              outClass: "animated fadeOut"
             },
             {
               id: "bounce-right-left",
               name: "Bounce: in right / out left",
-              inClass: "animate bounceInRight",
-              outClass: "animate bounceOutLeft"
+              inClass: "animated bounceInRight",
+              outClass: "animated bounceOutLeft"
+            },
+            {
+              id: "bounce-right-right",
+              name: "Bounce: in right / out right",
+              inClass: "animated bounceInRight",
+              outClass: "animated bounceOutRight"
             },
             {
               id: "bounce-left-right",
               name: "Bounce: in left / out right",
-              inClass: "animate bounceInLeft",
-              outClass: "animate bounceOutRight"
+              inClass: "animated bounceInLeft",
+              outClass: "animated bounceOutRight"
+            },
+            {
+              id: "bounce-left-left",
+              name: "Bounce: in left / out left",
+              inClass: "animated bounceInLeft",
+              outClass: "animated bounceOutLeft"
             },
             {
               id: "bounce-down-up",
               name: "Bounce: in down / out up",
-              inClass: "animate bounceInDown",
-              outClass: "animate bounceOutUp"
+              inClass: "animated bounceInDown",
+              outClass: "animated bounceOutUp"
             },
             {
               id: "bounce-up-down",
               name: "Bounce: in up / out down",
-              inClass: "animate bounceInUp",
-              outClass: "animate bounceOutDown"
+              inClass: "animated bounceInUp",
+              outClass: "animated bounceOutDown"
+            },
+            {
+              id: "bounce-up-up",
+              name: "Bounce: in up / out up",
+              inClass: "animated bounceInUp",
+              outClass: "animated bounceOutUp"
+            },
+            {
+              id: "bounce-down-down",
+              name: "Bounce: in down / out down",
+              inClass: "animated bounceInDown",
+              outClass: "animated bounceOutDown"
             }
           ]
         }
       ],
       animationLibrary: "default",
-      animation: "fade"
+      animation: "fade",
+      animationEnter: "",
+      animationLeave: ""
     };
   },
 
@@ -350,10 +389,39 @@ export default {
     },
 
     reloadPage() {
-      window.location.assign(
-        `${window.location.pathname}?css=${this.cssFramework}&type=${this.type}&position=${this.position}&icon=${this.iconLibrary}&animlib=${this.animationLibrary}&anim=${this.animation}`
-      );
+      this.calcAnimation();
+      let loc = `${window.location.pathname}?css=${this.cssFramework}&type=${this.type}&position=${this.position}`;
+      loc += `&icon=${this.iconLibrary}&animlib=${this.animationLibrary}&anim=${this.animation}`;
+      loc += `&animEnter=${this.animationEnter}&animLeave=${this.animationLeave}`;
+      window.location.assign(loc);
       //document.getElementById("remote-style").href = this.styleSheet;
+    },
+
+    calcAnimation() {
+      const animLib = this.animationLibraries.find(lib => {
+        return lib.id === this.animationLibrary;
+      });
+      const animPreset = animLib.presets.find(preset => {
+        return preset.id === this.animation;
+      });
+      if (animPreset) {
+        this.animationEnter = animPreset.inClass;
+        this.animationLeave = animPreset.outClass;
+        return `
+  transitionEnterActiveClass: "${animPreset.inClass}",
+  transitionLeaveActiveClass: "${animPreset.outClass}",`;
+      }
+      return "";
+    },
+
+    buildConfig() {
+      const config = {};
+      config["name"] = "default-name";
+      config["position"] = this.position;
+      config["reverse"] = this.reverse;
+      config["cssFramework"] = this.cssFramework;
+      config["iconLibrary"] = this.iconLibrary;
+      return config;
     }
   },
 
@@ -378,6 +446,12 @@ export default {
     });
 
     document.getElementById("remote-style").href = framework[0].url;
+
+    const animLib = this.animationLibraries.filter(lib => {
+      return lib.id === this.animationLibrary;
+    });
+
+    document.getElementById("remote-animation").href = animLib[0].url;
 
     // get some quotes for the notification content
     window.axios
@@ -461,15 +535,16 @@ p {
 
 .code-wrapper {
   text-align: left;
-  background-color: hsla(0, 0%, 90%, 0.3);
   margin: 2rem 0;
-  padding: 1rem;
-  border-radius: 1rem;
 }
 
 pre {
   display: block;
   white-space: pre-wrap;
+  background-color: hsla(0, 0%, 90%, 0.3);
+  margin: 2rem 0;
+  padding: 1rem;
+  border-radius: 1rem;
 }
 
 form {
