@@ -19,13 +19,11 @@ import Notification from "./Notification";
 export default {
   name: "DefaultNotification",
   extends: Notification,
-  components: {},
-  mixins: [],
-  props: {},
-  data() {
-    return {};
-  },
-  computed: {}
+  computed: {
+    notificationType() {
+      return `ubi-notify-notification-${this.notification.type}`;
+    }
+  }
 };
 </script>
 
@@ -88,63 +86,5 @@ export default {
 .ubi-notify-notification-warning {
   background-color: hsl(48, 100%, 95%);
   color: hsl(0, 0%, 50%);
-}
-
-.ubi-notify-transition-enter-active {
-  -webkit-animation-duration: 0.8s;
-  animation-duration: 0.8s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -webkit-animation-name: fade-in;
-  animation-name: fade-in;
-}
-
-.ubi-notify-transition-leave-active {
-  -webkit-animation-duration: 0.8s;
-  animation-duration: 0.8s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -webkit-animation-name: fade-out;
-  animation-name: fade-out;
-}
-
-.ubi-notify-transition-move {
-  transition: transform 0.7s;
-}
-
- @-webkit-keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes fade-out {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes fade-out {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
 }
 </style>

@@ -20,7 +20,6 @@ export default {
       componentFileName = null
     ) {
       if (!componentFileName) componentFileName = componentName;
-      console.log(`${componentPath}${componentFileName}`);
       if (this.componentIsLoaded(componentName)) return true;
       const component = require(`${componentPath}${componentFileName}`).default;
 

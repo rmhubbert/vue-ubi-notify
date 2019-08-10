@@ -1,27 +1,19 @@
 <template>
-  <div
-    :class="`ubi-notify-notification ${notificationType}`"
-    @click="$emit('remove', notification.id)"
-  >
-    <div class="ubi-notify-notification-heading" v-if="notification.heading">
-      <p>{{ notification.heading }}</p>
-    </div>
-
-    <div class="ubi-notify-notification-body">
-      <p>{{ notification.body }}</p>
-    </div>
-  </div>
+  <div>Base notification</div>
 </template>
 
 <script>
 export default {
   name: "DefaultNotification",
-  components: {},
-  mixins: [],
   props: {
     notification: {
       type: Object,
       required: true
+    },
+    clickToRemove: {
+      type: Boolean,
+      required: false,
+      default: true
     },
     showProgressBar: {
       type: Boolean,
@@ -34,14 +26,6 @@ export default {
       default() {
         return {};
       }
-    }
-  },
-  data() {
-    return {};
-  },
-  computed: {
-    notificationType() {
-      return `ubi-notify-notification-${this.notification.type}`;
     }
   }
 };
