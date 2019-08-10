@@ -11,25 +11,59 @@
     <p>A fully responsive notification plugin for Vue2+.</p>
     <div id="form-wrapper">
       <form @submit.prevent="sendNotification">
-        <label for="cssSelect" :class="labelClass">Pick a CSS Framework</label>
-        <div class="control">
-          <div :class="selectWrapperClass">
-            <select
-              id="cssSelect"
-              v-model="cssFramework"
-              @change="changeStyleSheet"
-              :class="selectClass"
-            >
-              <option value="default" :selected="cssFramework == 'default'"
-                >UbiNotify default</option
+        <div class="type-select-wrapper">
+          <label for="typeSelect" :class="labelClass"
+            >Pick a notification type</label
+          >
+          <div class="control">
+            <div :class="selectWrapperClass">
+              <select id="typeSelect" v-model="type" :class="selectClass">
+                <option value="default" :selected="type == 'default'"
+                  >Default</option
+                >
+                <option value="primary" :selected="type == 'primary'"
+                  >Primary</option
+                >
+                <option value="info" :selected="type == 'info'">Info</option>
+                <option value="success" :selected="type == 'success'"
+                  >Success</option
+                >
+                <option value="failure" :selected="type == 'failure'"
+                  >Failure</option
+                >
+                <option value="warning" :selected="type == 'warning'"
+                  >Warning</option
+                >
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="css-select-wrapper">
+          <label for="cssSelect" :class="labelClass"
+            >Pick a CSS Framework</label
+          >
+          <div class="control">
+            <div :class="selectWrapperClass">
+              <select
+                id="cssSelect"
+                v-model="cssFramework"
+                @change="changeStyleSheet"
+                :class="selectClass"
               >
-              <option value="bulma" :selected="cssFramework == 'bulma'"
-                >Bulma</option
-              >
-              <option value="bootstrap" :selected="cssFramework == 'bootstrap'"
-                >Bootstrap</option
-              >
-            </select>
+                <option value="default" :selected="cssFramework == 'default'"
+                  >UbiNotify default</option
+                >
+                <option value="bulma" :selected="cssFramework == 'bulma'"
+                  >Bulma</option
+                >
+                <option
+                  value="bootstrap"
+                  :selected="cssFramework == 'bootstrap'"
+                  >Bootstrap</option
+                >
+              </select>
+            </div>
           </div>
         </div>
         <button @click.prevent="sendNotification" :class="buttonClass">
@@ -48,9 +82,9 @@ export default {
     return {
       heading: "Hello!",
       body: "Here is your message",
-      types: ["primary", "info", "success", "failure", "warning"],
       currentIndex: 4,
       cssFramework: "default",
+      type: "default",
       cssFrameworkUrls: [
         {
           name: "default",
@@ -113,12 +147,7 @@ export default {
     },
 
     getNotificationType() {
-      if (this.currentIndex >= 4) {
-        this.currentIndex = 0;
-      } else {
-        this.currentIndex++;
-      }
-      return this.types[this.currentIndex];
+      return this.type;
     },
 
     changeStyleSheet() {
@@ -182,7 +211,7 @@ h1.title {
 
 p {
   font-weight: normal;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.05em;
   margin-bottom: 1rem;
 }
 
@@ -197,9 +226,9 @@ form {
   font-size: 1.2rem;
 }
 
-label {
+label, button {
   font-size: 1rem;
-  letter-spacing: 0.12rem;
+  letter-spacing: 0.05rem;
 }
 
 .ubi-notify-select-wrapper, .control {
