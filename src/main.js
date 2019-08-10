@@ -13,6 +13,8 @@ if (
   reverse = true;
 }
 
+window.axios = require("axios");
+
 import Vue from "vue";
 import App from "./App.vue";
 
@@ -30,7 +32,7 @@ const config2 = {
   width: "20vw",
   reverse: reverse,
   position: position,
-  duration: 5000,
+  duration: 7000,
   parentNode: "content-wrapper",
   cssFramework: cssFramework
 };

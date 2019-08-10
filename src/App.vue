@@ -124,6 +124,7 @@ export default {
       cssFramework: "default",
       type: "default",
       position: "top right",
+      quotes: [],
       cssFrameworkUrls: [
         {
           name: "default",
@@ -182,7 +183,8 @@ export default {
 
   methods: {
     sendNotification() {
-      this.$notify(this.body, this.heading, this.getNotificationType());
+      const quote = this.quotes.pop();
+      this.$notify(quote.quote, quote.author, this.getNotificationType());
     },
 
     getNotificationType() {
@@ -212,6 +214,17 @@ export default {
     });
 
     document.getElementById("remote-style").href = framework[0].url;
+
+    // get some quotes for the notification content
+    window.axios
+      .get("http://quotes.stormconsultancy.co.uk/quotes.json")
+      .then(response => {
+        this.quotes = response.data;
+        this.quotes.sort(() => Math.random() - 0.5);
+      })
+      .catch(errors => {
+        console.log(errors);
+      });
   }
 };
 </script>
@@ -251,6 +264,11 @@ html {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.ubi-container > div {
+  flex-grow: 1;
+  margin: 0 1rem;
 }
 
 .ubi-container-centered {
