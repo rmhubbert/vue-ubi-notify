@@ -22,52 +22,30 @@
                   :class="selectClass"
                   @change="reloadPage"
                 >
-                  <option value="top left" :selected="type == 'top left'"
-                    >Top Left</option
-                  >
-                  <option value="top center" :selected="type == 'top center'"
-                    >Top Center</option
-                  >
-                  <option value="top right" :selected="type == 'top right'"
-                    >Top Right</option
-                  >
-                  <option value="bottom left" :selected="type == 'bottom left'"
-                    >Bottom Left</option
-                  >
                   <option
-                    value="bottom right"
-                    :selected="type == 'bottom right'"
-                    >Bottom Right</option
-                  >
-                  <option
-                    value="bottom center"
-                    :selected="type == 'bottom center'"
-                    >Bottom Center</option
+                    v-for="pos in positions"
+                    :key="pos"
+                    :value="pos.toLowerCase()"
+                    :selected="type == pos.toLowerCase()"
+                    >{{ pos }}</option
                   >
                 </select>
               </div>
             </div>
           </div>
           <div class="type-select-wrapper">
-            <label for="typeSelect" :class="labelClass">Type</label>
+            <label for="typeSelect" :class="labelClass"
+              >Notification Type</label
+            >
             <div class="control">
               <div :class="selectWrapperClass">
                 <select id="typeSelect" v-model="type" :class="selectClass">
-                  <option value="default" :selected="type == 'default'"
-                    >Default</option
-                  >
-                  <option value="primary" :selected="type == 'primary'"
-                    >Primary</option
-                  >
-                  <option value="info" :selected="type == 'info'">Info</option>
-                  <option value="success" :selected="type == 'success'"
-                    >Success</option
-                  >
-                  <option value="danger" :selected="type == 'danger'"
-                    >Danger</option
-                  >
-                  <option value="warning" :selected="type == 'warning'"
-                    >Warning</option
+                  <option
+                    v-for="t in types"
+                    :key="t"
+                    :value="t.toLowerCase()"
+                    :selected="type == t.toLowerCase()"
+                    >{{ t }}</option
                   >
                 </select>
               </div>
@@ -86,28 +64,116 @@
                   @change="reloadPage"
                   :class="selectClass"
                 >
-                  <option value="default" :selected="cssFramework == 'default'"
-                    >UbiNotify default</option
-                  >
-                  <option value="bulma" :selected="cssFramework == 'bulma'"
-                    >Bulma</option
-                  >
                   <option
-                    value="bootstrap"
-                    :selected="cssFramework == 'bootstrap'"
-                    >Bootstrap</option
+                    v-for="css in cssFrameworks"
+                    :key="css.id"
+                    :value="css.id"
+                    :selected="cssFramework == css.id"
+                    >{{ css.name }}</option
+                  >
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="css-select-wrapper">
+            <label for="iconSelect" :class="labelClass">Icon Library</label>
+            <div class="control">
+              <div :class="selectWrapperClass">
+                <select
+                  id="iconSelect"
+                  v-model="iconLibrary"
+                  @change="reloadPage"
+                  :class="selectClass"
+                >
+                  <option
+                    v-for="icon in icons"
+                    :key="icon.id"
+                    :value="icon.id"
+                    :selected="iconLibrary == icon.id"
+                    >{{ icon.name }}</option
                   >
                 </select>
               </div>
             </div>
           </div>
         </div>
+
+        <div class="ubi-container">
+          <div class="animation-library-select-wrapper">
+            <label for="animationLibrarySelect" :class="labelClass"
+              >Animation Library</label
+            >
+            <div class="control">
+              <div :class="selectWrapperClass">
+                <select
+                  id="animationLibrarySelect"
+                  v-model="animationLibrary"
+                  @change="reloadPage"
+                  :class="selectClass"
+                >
+                  <option
+                    v-for="al in animationLibraries"
+                    :key="al.id"
+                    :value="al.id"
+                    :selected="animationLibrary == al.id"
+                    >{{ al.name }}</option
+                  >
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="animation-select-wrapper">
+            <label for="animationSelect" :class="labelClass">Animation</label>
+            <div class="control">
+              <div :class="selectWrapperClass">
+                <select
+                  id="iconSelect"
+                  v-model="animation"
+                  @change="reloadPage"
+                  :class="selectClass"
+                  v-for="al in animationLibraries"
+                  :key="al.id"
+                  v-show="animationLibrary === al.id"
+                >
+                  <option
+                    v-for="animation in al.presets"
+                    :key="animation.id"
+                    :value="animation.id"
+                    :selected="animation == animation.id"
+                    >{{ animation.name }}</option
+                  >
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="ubi-container-centered">
           <button @click.prevent="sendNotification" :class="buttonClass">
             UbiNotify!
           </button>
         </div>
       </form>
+    </div>
+
+    <div class="code-wrapper">
+      <pre>
+import UbiNotify from "vue-ubi-notify";
+
+const UbiNotifyConfig = { 
+  name: "CHANGE_THIS_TO_A_UNIQUE_NAME", 
+  position: "{{ position }}",
+  reverse: {{ compReverse }},
+  cssFramework: "{{ cssFramework }}",
+  iconLibrary: "{{ iconLibrary }}",
+  animationLibrary: "{{ animationLibrary }}"
+}
+
+Vue.use(UbiNotify, UbiNotifyConfig);
+</pre
+      >
     </div>
   </main>
 </template>
@@ -118,16 +184,45 @@ export default {
   components: {},
   data() {
     return {
-      heading: "Hello!",
-      body: "Here is your message",
-      currentIndex: 4,
-      cssFramework: "default",
+      types: ["Default", "Primary", "Info", "Success", "Danger", "Warning"],
       type: "default",
+      positions: [
+        "Top Left",
+        "Top Center",
+        "Top Right",
+        "Bottom Left",
+        "Bottom Center",
+        "Bottom Right"
+      ],
       position: "top right",
-      quotes: [],
-      cssFrameworkUrls: [
+      icons: [
         {
-          name: "default",
+          id: "none",
+          name: "None"
+        },
+        {
+          id: "font-awesome",
+          name: "Font Awesome"
+        },
+        {
+          id: "google-material",
+          name: "Google Material"
+        },
+        {
+          id: "ionicons",
+          name: "Ionicons"
+        },
+        {
+          id: "typicons",
+          name: "Typicons"
+        }
+      ],
+      iconLibrary: "default",
+      quotes: [],
+      cssFrameworks: [
+        {
+          name: "UbiNotify default",
+          id: "default",
           url:
             location.protocol +
             "//" +
@@ -136,16 +231,67 @@ export default {
             "css/default.css"
         },
         {
-          name: "bulma",
+          name: "Bulma",
+          id: "bulma",
           url:
             "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"
         },
         {
-          name: "bootstrap",
+          name: "Bootstrap",
+          id: "bootstrap",
           url:
             "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         }
-      ]
+      ],
+      cssFramework: "UbiNotify default style",
+      animationLibraries: [
+        {
+          id: "default",
+          name: "UbiNotify default",
+          presets: [
+            {
+              id: "fade",
+              name: "Fade: in / out"
+            }
+          ]
+        },
+        {
+          id: "animate.css",
+          name: "Animate.css",
+          presets: [
+            {
+              id: "fade",
+              name: "Fade: in / out"
+            },
+            {
+              id: "bounce-right-left",
+              name: "Bounce: in right / out left",
+              inClass: "animate bounceInRight",
+              outClass: "animate bounceOutLeft"
+            },
+            {
+              id: "bounce-left-right",
+              name: "Bounce: in left / out right",
+              inClass: "animate bounceInLeft",
+              outClass: "animate bounceOutRight"
+            },
+            {
+              id: "bounce-down-up",
+              name: "Bounce: in down / out up",
+              inClass: "animate bounceInDown",
+              outClass: "animate bounceOutUp"
+            },
+            {
+              id: "bounce-up-down",
+              name: "Bounce: in up / out down",
+              inClass: "animate bounceInUp",
+              outClass: "animate bounceOutDown"
+            }
+          ]
+        }
+      ],
+      animationLibrary: "default",
+      animation: "fade"
     };
   },
 
@@ -178,6 +324,18 @@ export default {
       else if (this.cssFramework === "bulma") return "label";
       else if (this.cssFramework === "bootstrap") return "";
       return "";
+    },
+
+    compReverse() {
+      let reverse = false;
+      if (
+        this.position === "bottom right" ||
+        this.position === "bottom center" ||
+        this.position === "bottom left"
+      ) {
+        reverse = true;
+      }
+      return reverse;
     }
   },
 
@@ -193,7 +351,7 @@ export default {
 
     reloadPage() {
       window.location.assign(
-        `${window.location.pathname}?css=${this.cssFramework}&type=${this.type}&position=${this.position}`
+        `${window.location.pathname}?css=${this.cssFramework}&type=${this.type}&position=${this.position}&icon=${this.iconLibrary}&animlib=${this.animationLibrary}&anim=${this.animation}`
       );
       //document.getElementById("remote-style").href = this.styleSheet;
     }
@@ -208,9 +366,15 @@ export default {
     else this.type = "default";
     if (params.get("position")) this.position = params.get("position");
     else this.position = "top right";
+    if (params.get("icon")) this.iconLibrary = params.get("icon");
+    else this.iconLibrary = "none";
+    if (params.get("animlib")) this.animationLibrary = params.get("animlib");
+    else this.animationLibrary = "default";
+    if (params.get("anim")) this.animation = params.get("anim");
+    else this.animation = "fade";
 
-    const framework = this.cssFrameworkUrls.filter(framework => {
-      return framework.name === this.cssFramework;
+    const framework = this.cssFrameworks.filter(framework => {
+      return framework.id === this.cssFramework;
     });
 
     document.getElementById("remote-style").href = framework[0].url;
@@ -237,12 +401,12 @@ body {
 }
 
 html {
-  max-width: 100%;
-  overflow: hidden;
+
 }
 
 #content-wrapper {
-  min-height: 100vh;
+  max-width: 100%;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -253,7 +417,7 @@ html {
 }
 
 #content {
-  width: 40%;
+  width: 50%;
   text-align: center;
   line-height: 1.5em;
   font-size: 1rem;
@@ -291,9 +455,21 @@ p {
 }
 
 #form-wrapper {
-  width: 70%;
   margin: 3rem auto 0 auto;
   text-align: left;
+}
+
+.code-wrapper {
+  text-align: left;
+  background-color: hsla(0, 0%, 90%, 0.3);
+  margin: 2rem 0;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+pre {
+  display: block;
+  white-space: pre-wrap;
 }
 
 form {
@@ -369,5 +545,6 @@ button.ubi-notify-button {
 .ubi-notify-bulma p.content {
   font-size: 0.9rem;
   margin-top: 0.2rem;
+  margin-bottom: 0;
 }
 </style>

@@ -154,7 +154,8 @@ export default {
 
 <style lang="css">
 .ubi-notify-root {
-  position: absolute;
+  position: fixed;
+  width: 20vw;
 }
 
 .ubi-notify-root-top-left, .ubi-notify-root-left-top {
@@ -172,63 +173,5 @@ export default {
 .ubi-notify-root-bottom-right, .ubi-notify-root-right-bottom {
   bottom: 0;
   right: 0;
-}
-
-.ubi-notify-transition-enter-active {
-  -webkit-animation-duration: 0.8s;
-  animation-duration: 0.8s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -webkit-animation-name: fade-in;
-  animation-name: fade-in;
-}
-
-.ubi-notify-transition-leave-active {
-  -webkit-animation-duration: 0.8s;
-  animation-duration: 0.8s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -webkit-animation-name: fade-out;
-  animation-name: fade-out;
-}
-
-.ubi-notify-transition-move {
-  transition: transform 0.7s;
-}
-
- @-webkit-keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes fade-out {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes fade-out {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
 }
 </style>

@@ -27,64 +27,6 @@ export default {
 };
 </script>
 
-<style lang="css">
-.ubi-notify-notification {
-  padding: 0;
-  margin: 1rem;
-  border-radius: 0.4rem;
-  box-shadow: 3px 5px 11px 0px rgba(0,0,0,0.16);
-  background-color: hsl(0, 0%, 95%);
-  color: hsl(0, 0%, 45%);
-  font-size: 0.9rem;
-}
-
-.ubi-notify-notification-heading, .ubi-notify-notification-body {
-  margin: 0 0.5rem;
-}
-
-.ubi-notify-notification-heading p, .ubi-notify-notification-body p {
-  margin: 0;
-  padding: 0;
-}
-
-.ubi-notify-notification-heading {
-  padding: 0.5rem 0 0.2rem 0;
-}
-
-.ubi-notify-notification-heading p {
-  font-weight: 500;
-}
-
-.ubi-notify-notification-body p {
-  font-size: 0.9em;
-}
-
-.ubi-notify-notification-body {
-  padding-bottom: 0.5rem;
-}
-
-.ubi-notify-notification-primary {
-  background-color: hsl(0, 0%, 95%);
-  color: hsl(0, 0%, 45%);
-}
-
-.ubi-notify-notification-info {
-  background-color: hsl(0, 0%, 90%);
-  color: hsl(0, 0%, 40%);
-}
-
-.ubi-notify-notification-success {
-  background-color: hsl(141, 71%, 90%);
-  color: hsl(0, 0%, 50%);
-}
-
-.ubi-notify-notification-danger {
-  background-color: hsl(348, 100%, 90%);
-  color: hsl(0, 0%, 50%);
-}
-
-.ubi-notify-notification-warning {
-  background-color: hsl(48, 100%, 95%);
-  color: hsl(0, 0%, 50%);
-}
+<style lang="scss">
+@import "../assets/scss/DefaultNotification.scss";
 </style>

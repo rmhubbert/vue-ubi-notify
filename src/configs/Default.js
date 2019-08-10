@@ -6,7 +6,7 @@ export default {
   parentNode: null,
   duration: 5000,
   reverse: false,
-  defaultNotificationType: "standard",
+  defaultNotificationType: "default",
   transitionName: "ubi-notify-transition",
   notification: {
     clickToRemove: true,

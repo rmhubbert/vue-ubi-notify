@@ -21,15 +21,14 @@ import App from "./App.vue";
 Vue.config.productionTip = false;
 
 import UbiNotify from "./index.js";
-
+/*
 const config = {
   name: "config",
   cssFramework: cssFramework
 };
-
-const config2 = {
-  name: "config2",
-  width: "20vw",
+*/
+const config = {
+  name: "config",
   reverse: reverse,
   position: position,
   duration: 7000,
@@ -37,7 +36,7 @@ const config2 = {
   cssFramework: cssFramework
 };
 
-Vue.use(UbiNotify, [config2]);
+Vue.use(UbiNotify, [config]);
 
 new Vue({
   render: h => h(App)
