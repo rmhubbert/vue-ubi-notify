@@ -125,24 +125,53 @@
           </div>
 
           <div class="animation-select-wrapper">
-            <label for="animationSelect" :class="labelClass">Animation</label>
+            <label for="enterAnimationSelect" :class="labelClass"
+              >Entry Animation</label
+            >
             <div class="control">
               <div :class="selectWrapperClass">
                 <select
-                  id="iconSelect"
-                  v-model="animation"
+                  id="enterAnimationSelect"
+                  v-model="animationEnter"
                   @change="reloadPage"
                   :class="selectClass"
-                  v-for="al in animationLibraries"
-                  :key="al.id"
-                  v-show="animationLibrary === al.id"
+                  v-for="anim in animationLibraries"
+                  :key="anim.id"
+                  v-show="animationLibrary === anim.id"
                 >
                   <option
-                    v-for="animation in al.presets"
-                    :key="animation.id"
-                    :value="animation.id"
-                    :selected="animation == animation.id"
-                    >{{ animation.name }}</option
+                    v-for="enterAnimation in anim.enter"
+                    :key="enterAnimation.id"
+                    :value="enterAnimation.cssClass"
+                    :selected="enterAnimation == enterAnimation.id"
+                    >{{ enterAnimation.name }}</option
+                  >
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="animation-select-wrapper">
+            <label for="leaveAnimationSelect" :class="labelClass"
+              >Exit Animation</label
+            >
+            <div class="control">
+              <div :class="selectWrapperClass">
+                <select
+                  id="leaveAnimationSelect"
+                  v-model="animationLeave"
+                  @change="reloadPage"
+                  :class="selectClass"
+                  v-for="anim in animationLibraries"
+                  :key="anim.id"
+                  v-show="animationLibrary === anim.id"
+                >
+                  <option
+                    v-for="leaveAnimation in anim.leave"
+                    :key="leaveAnimation.id"
+                    :value="leaveAnimation.cssClass"
+                    :selected="leaveAnimation == leaveAnimation.id"
+                    >{{ leaveAnimation.name }}</option
                   >
                 </select>
               </div>
@@ -159,16 +188,19 @@
     </div>
 
     <div class="code-wrapper">
-      <p>Add the following specially compiled config to your main Vue file.</p>
+      <p>
+        We've made you a specially compiled config based on your selections
+        above. Feel free to have a play around until you find a configuration
+        you like. It'll automatically update here for you to copy.
+      </p>
       <pre>
 import UbiNotify from "vue-ubi-notify";
 
 const UbiNotifyConfig = { 
   name: "CHANGE_THIS_TO_A_UNIQUE_NAME", 
   position: "{{ position }}",
-  reverse: {{ compReverse }},
-  cssFramework: "{{ cssFramework }}",
-  iconLibrary: "{{ iconLibrary }}",{{ calcAnimation() }}
+  reverse: {{ compReverse }},{{ compCssFramework }}{{ compIconLibrary
+        }}{{ compAnimationEnter }}{{ compAnimationLeave }}
 }
 
 Vue.use(UbiNotify, UbiNotifyConfig);
@@ -184,7 +216,6 @@ export default {
   components: {},
   data() {
     return {
-      config: this.buildConfig(),
       types: ["Default", "Primary", "Info", "Success", "Danger", "Warning"],
       type: "default",
       positions: [
@@ -218,7 +249,7 @@ export default {
           name: "Typicons"
         }
       ],
-      iconLibrary: "default",
+      iconLibrary: "",
       quotes: [],
       cssFrameworks: [
         {
@@ -255,12 +286,18 @@ export default {
             location.host +
             location.pathname +
             "css/default.css",
-          presets: [
+          enter: [
             {
-              id: "fade",
-              name: "Fade: in / out",
-              inClass: "ubi-notify-transition-fade-in",
-              outClass: "ubi-notify-transition-fade-out"
+              id: "fade-in",
+              name: "Fade in",
+              cssClass: "ubi-notify-transition-fade-in"
+            }
+          ],
+          leave: [
+            {
+              id: "fade-out",
+              name: "Fade out",
+              cssClass: "ubi-notify-transition-fade-out"
             }
           ]
         },
@@ -269,66 +306,63 @@ export default {
           name: "Animate.css",
           url:
             "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css",
-          presets: [
+          enter: [
             {
-              id: "fade",
-              name: "Fade: in / out",
-              inClass: "animated fadeIn",
-              outClass: "animated fadeOut"
+              id: "fade-in",
+              name: "Fade in",
+              cssClass: "animated fadeIn"
             },
             {
-              id: "bounce-right-left",
-              name: "Bounce: in right / out left",
-              inClass: "animated bounceInRight",
-              outClass: "animated bounceOutLeft"
+              id: "bounce-in-right",
+              name: "Bounce in right",
+              cssClass: "animated bounceInRight"
             },
             {
-              id: "bounce-right-right",
-              name: "Bounce: in right / out right",
-              inClass: "animated bounceInRight",
-              outClass: "animated bounceOutRight"
+              id: "bounce-in-left",
+              name: "Bounce in left",
+              cssClass: "animated bounceInLeft"
             },
             {
-              id: "bounce-left-right",
-              name: "Bounce: in left / out right",
-              inClass: "animated bounceInLeft",
-              outClass: "animated bounceOutRight"
+              id: "bounce-in-down",
+              name: "Bounce in down",
+              cssClass: "animated bounceInDown"
             },
             {
-              id: "bounce-left-left",
-              name: "Bounce: in left / out left",
-              inClass: "animated bounceInLeft",
-              outClass: "animated bounceOutLeft"
+              id: "bounce-in-up",
+              name: "Bounce in up",
+              cssClass: "animated bounceInUp"
+            }
+          ],
+          leave: [
+            {
+              id: "fade-out",
+              name: "Fade out",
+              cssClass: "animated fadeOut"
             },
             {
-              id: "bounce-down-up",
-              name: "Bounce: in down / out up",
-              inClass: "animated bounceInDown",
-              outClass: "animated bounceOutUp"
+              id: "bounce-out-right",
+              name: "Bounce out right",
+              cssClass: "animated bounceOutRight"
             },
             {
-              id: "bounce-up-down",
-              name: "Bounce: in up / out down",
-              inClass: "animated bounceInUp",
-              outClass: "animated bounceOutDown"
+              id: "bounce-out-left",
+              name: "Bounce out left",
+              cssClass: "animated bounceOutLeft"
             },
             {
-              id: "bounce-up-up",
-              name: "Bounce: in up / out up",
-              inClass: "animated bounceInUp",
-              outClass: "animated bounceOutUp"
+              id: "bounce-out-down",
+              name: "Bounce out down",
+              cssClass: "animated bounceOutDown"
             },
             {
-              id: "bounce-down-down",
-              name: "Bounce: in down / out down",
-              inClass: "animated bounceInDown",
-              outClass: "animated bounceOutDown"
+              id: "bounce-out-up",
+              name: "Bounce out up",
+              cssClass: "animated bounceOutUp"
             }
           ]
         }
       ],
       animationLibrary: "default",
-      animation: "fade",
       animationEnter: "",
       animationLeave: ""
     };
@@ -375,6 +409,38 @@ export default {
         reverse = true;
       }
       return reverse;
+    },
+
+    compIconLibrary() {
+      if (this.iconLibrary !== "" && this.iconLibrary !== "none") {
+        return `
+  iconLibrary: "${this.iconLibrary}",`;
+      }
+      return "";
+    },
+
+    compAnimationEnter() {
+      if (this.animationEnter !== "" && this.animationEnter !== "none") {
+        return `
+  transitionEnterActiveClass: "${this.animationEnter}",`;
+      }
+      return "";
+    },
+
+    compAnimationLeave() {
+      if (this.animationLeave !== "" && this.animationLeave !== "none") {
+        return `
+  transitionLeaveActiveClass: "${this.animationLeave}",`;
+      }
+      return "";
+    },
+
+    compCssFramework() {
+      if (this.cssFramework !== "" && this.cssFramework !== "default") {
+        return `
+  cssFramework: "${this.cssFramework}",`;
+      }
+      return "";
     }
   },
 
@@ -389,39 +455,11 @@ export default {
     },
 
     reloadPage() {
-      this.calcAnimation();
       let loc = `${window.location.pathname}?css=${this.cssFramework}&type=${this.type}&position=${this.position}`;
-      loc += `&icon=${this.iconLibrary}&animlib=${this.animationLibrary}&anim=${this.animation}`;
+      loc += `&icon=${this.iconLibrary}&animlib=${this.animationLibrary}`;
       loc += `&animEnter=${this.animationEnter}&animLeave=${this.animationLeave}`;
       window.location.assign(loc);
       //document.getElementById("remote-style").href = this.styleSheet;
-    },
-
-    calcAnimation() {
-      const animLib = this.animationLibraries.find(lib => {
-        return lib.id === this.animationLibrary;
-      });
-      const animPreset = animLib.presets.find(preset => {
-        return preset.id === this.animation;
-      });
-      if (animPreset) {
-        this.animationEnter = animPreset.inClass;
-        this.animationLeave = animPreset.outClass;
-        return `
-  transitionEnterActiveClass: "${animPreset.inClass}",
-  transitionLeaveActiveClass: "${animPreset.outClass}",`;
-      }
-      return "";
-    },
-
-    buildConfig() {
-      const config = {};
-      config["name"] = "default-name";
-      config["position"] = this.position;
-      config["reverse"] = this.reverse;
-      config["cssFramework"] = this.cssFramework;
-      config["iconLibrary"] = this.iconLibrary;
-      return config;
     }
   },
 
@@ -438,8 +476,10 @@ export default {
     else this.iconLibrary = "none";
     if (params.get("animlib")) this.animationLibrary = params.get("animlib");
     else this.animationLibrary = "default";
-    if (params.get("anim")) this.animation = params.get("anim");
-    else this.animation = "fade";
+    if (params.get("animEnter")) this.animationEnter = params.get("animEnter");
+    else this.animationEnter = "fade-in";
+    if (params.get("animLeave")) this.animationLeave = params.get("animLeave");
+    else this.animationLeave = "fade-out";
 
     const framework = this.cssFrameworks.filter(framework => {
       return framework.id === this.cssFramework;
