@@ -5,8 +5,9 @@
       Lightweight. Easy to use. Highly configurable.
     </p>
     <p>
-      Out of the box compatibility with<br />Boostrap, Bulma, Semantic UI &amp;
-      Materialize<br />CSS Frameworks.
+      Out of the box compatibility with Boostrap, Bulma, Semantic UI ,
+      Materialize, Font Awesome, Google Material Icons, Ionicons, Typicons &amp;
+      Animate.css.
     </p>
     <p>A fully responsive notification plugin for Vue2+.</p>
     <div id="form-wrapper">
@@ -273,6 +274,12 @@ export default {
           id: "bootstrap",
           url:
             "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        },
+        {
+          name: "Materialize",
+          id: "materialize",
+          url:
+            "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
         }
       ],
       cssFramework: "UbiNotify default style",
@@ -374,6 +381,8 @@ export default {
         return "ubi-notify-button ubi-notify-primary";
       else if (this.cssFramework === "bulma") return "button is-primary";
       else if (this.cssFramework === "bootstrap") return "btn btn-primary";
+      else if (this.cssFramework === "materialize")
+        return "waves-effect waves-light btn";
       return "";
     },
 
@@ -382,6 +391,7 @@ export default {
         return "ubi-notify-select ubi-notify-primary";
       else if (this.cssFramework === "bulma") return "";
       else if (this.cssFramework === "bootstrap") return "custom-select";
+      else if (this.cssFramework === "materialize") return "browser-default";
       return "";
     },
 
