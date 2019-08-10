@@ -1,6 +1,6 @@
 <template>
   <main id="content" class="container">
-    <h1>UbiNotify</h1>
+    <h1 class="title">UbiNotify</h1>
     <p>
       Lightweight. Easy to use. Highly configurable.
     </p>
@@ -171,9 +171,10 @@ html {
   width: 40%;
   text-align: center;
   line-height: 1.5em;
+  font-size: 1rem;
 }
 
-h1 {
+h1.title {
   font-size: 4rem;
   font-weight: normal;
   letter-spacing: 0.2rem;
@@ -182,6 +183,7 @@ h1 {
 p {
   font-weight: normal;
   letter-spacing: 0.07em;
+  margin-bottom: 1rem;
 }
 
 #form-wrapper {
