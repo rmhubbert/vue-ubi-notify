@@ -2,6 +2,16 @@ const uri = window.location.search.substring(1);
 const params = new URLSearchParams(uri);
 let cssFramework = "default";
 if (params.get("css")) cssFramework = params.get("css");
+let position = "top right";
+if (params.get("position")) position = params.get("position");
+let reverse = false;
+if (
+  position === "bottom right" ||
+  position === "bottom center" ||
+  position === "bottom left"
+) {
+  reverse = true;
+}
 
 import Vue from "vue";
 import App from "./App.vue";
@@ -18,8 +28,8 @@ const config = {
 const config2 = {
   name: "config2",
   width: "20vw",
-  reverse: true,
-  position: "bottom right",
+  reverse: reverse,
+  position: position,
   duration: 5000,
   parentNode: "content-wrapper",
   cssFramework: cssFramework

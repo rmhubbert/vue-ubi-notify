@@ -1,5 +1,5 @@
 <template>
-  <main id="content" class="container">
+  <main id="content">
     <h1 class="title">UbiNotify</h1>
     <p>
       Lightweight. Easy to use. Highly configurable.
@@ -11,64 +11,102 @@
     <p>A fully responsive notification plugin for Vue2+.</p>
     <div id="form-wrapper">
       <form @submit.prevent="sendNotification">
-        <div class="type-select-wrapper">
-          <label for="typeSelect" :class="labelClass"
-            >Pick a notification type</label
-          >
-          <div class="control">
-            <div :class="selectWrapperClass">
-              <select id="typeSelect" v-model="type" :class="selectClass">
-                <option value="default" :selected="type == 'default'"
-                  >Default</option
+        <div class="ubi-container">
+          <div class="position-select-wrapper">
+            <label for="positionSelect" :class="labelClass">Position</label>
+            <div class="control">
+              <div :class="selectWrapperClass">
+                <select
+                  id="positionSelect"
+                  v-model="position"
+                  :class="selectClass"
+                  @change="reloadPage"
                 >
-                <option value="primary" :selected="type == 'primary'"
-                  >Primary</option
-                >
-                <option value="info" :selected="type == 'info'">Info</option>
-                <option value="success" :selected="type == 'success'"
-                  >Success</option
-                >
-                <option value="danger" :selected="type == 'danger'"
-                  >Danger</option
-                >
-                <option value="warning" :selected="type == 'warning'"
-                  >Warning</option
-                >
-              </select>
+                  <option value="top left" :selected="type == 'top left'"
+                    >Top Left</option
+                  >
+                  <option value="top center" :selected="type == 'top center'"
+                    >Top Center</option
+                  >
+                  <option value="top right" :selected="type == 'top right'"
+                    >Top Right</option
+                  >
+                  <option value="bottom left" :selected="type == 'bottom left'"
+                    >Bottom Left</option
+                  >
+                  <option
+                    value="bottom right"
+                    :selected="type == 'bottom right'"
+                    >Bottom Right</option
+                  >
+                  <option
+                    value="bottom center"
+                    :selected="type == 'bottom center'"
+                    >Bottom Center</option
+                  >
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="type-select-wrapper">
+            <label for="typeSelect" :class="labelClass">Type</label>
+            <div class="control">
+              <div :class="selectWrapperClass">
+                <select id="typeSelect" v-model="type" :class="selectClass">
+                  <option value="default" :selected="type == 'default'"
+                    >Default</option
+                  >
+                  <option value="primary" :selected="type == 'primary'"
+                    >Primary</option
+                  >
+                  <option value="info" :selected="type == 'info'">Info</option>
+                  <option value="success" :selected="type == 'success'"
+                    >Success</option
+                  >
+                  <option value="danger" :selected="type == 'danger'"
+                    >Danger</option
+                  >
+                  <option value="warning" :selected="type == 'warning'"
+                    >Warning</option
+                  >
+                </select>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="css-select-wrapper">
-          <label for="cssSelect" :class="labelClass"
-            >Pick a CSS Framework</label
-          >
-          <div class="control">
-            <div :class="selectWrapperClass">
-              <select
-                id="cssSelect"
-                v-model="cssFramework"
-                @change="changeStyleSheet"
-                :class="selectClass"
-              >
-                <option value="default" :selected="cssFramework == 'default'"
-                  >UbiNotify default</option
+        <div class="ubi-container">
+          <div class="css-select-wrapper">
+            <label for="cssSelect" :class="labelClass">CSS Framework</label>
+            <div class="control">
+              <div :class="selectWrapperClass">
+                <select
+                  id="cssSelect"
+                  v-model="cssFramework"
+                  @change="reloadPage"
+                  :class="selectClass"
                 >
-                <option value="bulma" :selected="cssFramework == 'bulma'"
-                  >Bulma</option
-                >
-                <option
-                  value="bootstrap"
-                  :selected="cssFramework == 'bootstrap'"
-                  >Bootstrap</option
-                >
-              </select>
+                  <option value="default" :selected="cssFramework == 'default'"
+                    >UbiNotify default</option
+                  >
+                  <option value="bulma" :selected="cssFramework == 'bulma'"
+                    >Bulma</option
+                  >
+                  <option
+                    value="bootstrap"
+                    :selected="cssFramework == 'bootstrap'"
+                    >Bootstrap</option
+                  >
+                </select>
+              </div>
             </div>
           </div>
         </div>
-        <button @click.prevent="sendNotification" :class="buttonClass">
-          UbiNotify Me!
-        </button>
+        <div class="ubi-container-centered">
+          <button @click.prevent="sendNotification" :class="buttonClass">
+            UbiNotify!
+          </button>
+        </div>
       </form>
     </div>
   </main>
@@ -85,6 +123,7 @@ export default {
       currentIndex: 4,
       cssFramework: "default",
       type: "default",
+      position: "top right",
       cssFrameworkUrls: [
         {
           name: "default",
@@ -150,9 +189,9 @@ export default {
       return this.type;
     },
 
-    changeStyleSheet() {
+    reloadPage() {
       window.location.assign(
-        `${window.location.pathname}?css=${this.cssFramework}&type=${this.type}`
+        `${window.location.pathname}?css=${this.cssFramework}&type=${this.type}&position=${this.position}`
       );
       //document.getElementById("remote-style").href = this.styleSheet;
     }
@@ -165,6 +204,8 @@ export default {
     else this.cssFramework = "default";
     if (params.get("type")) this.type = params.get("type");
     else this.type = "default";
+    if (params.get("position")) this.position = params.get("position");
+    else this.position = "top right";
 
     const framework = this.cssFrameworkUrls.filter(framework => {
       return framework.name === this.cssFramework;
@@ -205,6 +246,20 @@ html {
   font-size: 1rem;
 }
 
+.ubi-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.ubi-container-centered {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 h1.title {
   font-size: 4rem;
   font-weight: normal;
@@ -218,13 +273,12 @@ p {
 }
 
 #form-wrapper {
-  width: 100%;
-  text-align: center;
+  width: 70%;
   margin: 3rem auto 0 auto;
+  text-align: left;
 }
 
 form {
-  text-align: center;
   font-size: 1.2rem;
 }
 
@@ -234,14 +288,12 @@ label, button {
 }
 
 .ubi-notify-select-wrapper, .control {
-  text-align: center;
-  width: 60%;
   margin: 0 auto 2rem auto;
 
 }
 
 .custom-select {
-  width: 70%;
+  width: 100%;
 }
 
 select.ubi-notify-select {
