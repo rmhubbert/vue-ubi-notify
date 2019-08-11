@@ -47,10 +47,7 @@ export default {
 
 <style lang="css">
 .toast {
-  font-size: 1rem;
   position: inherit;
-  margin: 1rem;
-  padding: 0.6rem 1rem;
   align-items: left;
   flex-direction: column;
   justify-content: flex-start;
@@ -58,15 +55,5 @@ export default {
 }
 .toast > div {
   width: 100%;
-  text-align: left;
-}
-
-.toast-header {
-  font-weight: 500;
-  margin-bottom: 0.3rem;
-}
-
-.toast-content {
-  font-size: 0.9rem;
 }
 </style>

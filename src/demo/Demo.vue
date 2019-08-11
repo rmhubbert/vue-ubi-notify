@@ -101,6 +101,7 @@ import DefaultConfig from "../configs/Default";
 import DemoSelect from "./components/DemoSelect";
 import DemoButton from "./components/DemoButton";
 import UbiConfigViewer from "./components/UbiConfigViewer";
+import Quotes from "./data/quotes";
 import CssFrameworks from "./data/cssFrameworks";
 import IconLibraries from "./data/iconLibraries";
 import AnimationLibraries from "./data/animationLibraries";
@@ -118,16 +119,16 @@ export default {
   },
   data() {
     return {
-      quotes: [],
+      quotes: Quotes,
       demoName: "CHANGE_THIS_TO_A_UNIQUE_STRING",
       notificationPositions: NotificationPositions,
       notificationPosition: DefaultConfig.position,
       notificationDurations: NotificationDurations,
-      notificationDuration: 5000,
+      notificationDuration: DefaultConfig.duration,
       notificationTypes: NotificationTypes,
-      notificationType: "default",
+      notificationType: DefaultConfig.defaultNotificationType,
       cssFrameworks: CssFrameworks,
-      cssFramework: "default",
+      cssFramework: DefaultConfig.cssFramework,
       iconLibraries: IconLibraries,
       iconLibrary: "none",
       animationLibraries: AnimationLibraries,
@@ -159,18 +160,6 @@ export default {
       );
     },
 
-    loadQuotes() {
-      window.axios
-        .get("http://quotes.stormconsultancy.co.uk/quotes.json")
-        .then(response => {
-          this.quotes = response.data;
-          this.quotes.sort(() => Math.random() - 0.5);
-        })
-        .catch(errors => {
-          console.log(errors);
-        });
-    },
-
     swapCssFramework() {
       const framework = this.cssFrameworks.find(framework => {
         return framework.id === this.cssFramework;
@@ -187,7 +176,8 @@ export default {
   },
 
   created() {
-    this.loadQuotes();
+    // randomize the quotes
+    this.quotes.sort(() => Math.random() - 0.5);
   }
 };
 </script>

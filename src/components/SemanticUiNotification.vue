@@ -13,9 +13,9 @@
         {{ notification.heading }}
       </div>
 
-      <p class="semantic-ui-content">
+      <div class="content">
         {{ notification.body }}
-      </p>
+      </div>
     </div>
   </div>
 </template>
@@ -87,9 +87,5 @@ $secondarycolor: $grey;
 
 .is-primary {
   background-color: $yellow;
-}
-
-.ubi-notify-semantic-ui {
-  margin: 1rem;
 }
 </style>

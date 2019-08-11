@@ -156,22 +156,65 @@ button.ubi-notify-button {
   letter-spacing: 0.12em;
 }
 
-.notification,
-.toast {
-  margin: 1rem;
+.ubi-notify-bulma {
+  .notification {
+    padding: 0.7rem;
+    font-size: 0.8rem;
+
+    .title {
+      font-size: 1em;
+      margin: 0;
+    }
+
+    .content {
+      font-size: 0.9em;
+      line-height: 1.3em;
+      margin-top: 0.2rem;
+      margin-bottom: 0;
+    }
+  }
 }
 
-.ubi-notify-bulma.notification {
-  padding: 0.7rem;
+.ubi-notify-bootstrap {
+  .toast {
+    line-height: 1;
+    font-size: 0.9rem;
+    margin: 0;
+
+    .toast-header {
+      font-size: 1em;
+    }
+
+    .toast-body {
+      font-size: 0.9em;
+      line-height: 1.4em;
+    }
+  }
 }
 
-.ubi-notify-bulma p.title {
+.ubi-notify-materialize.toast {
+  line-height: 1;
   font-size: 1rem;
-  margin: 0;
+  margin: 1rem;
+
+  .toast-header {
+    font-size: 1em;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+
+  .toast-content {
+    font-size: 0.9em;
+    line-height: 1.4em;
+  }
 }
 
-.ubi-notify-bulma p.content {
-  font-size: 0.9rem;
-  margin-top: 0.2rem;
-  margin-bottom: 0;
+.ubi-notify-semantic-ui {
+  .message {
+    .header {
+    }
+
+    .content {
+    }
+  }
 }
