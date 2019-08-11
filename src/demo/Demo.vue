@@ -185,10 +185,10 @@ export default {
       iconLibrary: "none",
       animationLibraries: AnimationLibraries,
       animationLibrary: "ubianimate",
-      animationEnter: DefaultConfig.transitionEnterActiveClass,
-      animationLeave: DefaultConfig.transitionLeaveActiveClass,
+      animationEnter: DefaultConfig.animation.enterActive,
+      animationLeave: DefaultConfig.animation.leaveActive,
       animationTransitionDurations: AnimationTransitionDurations,
-      animationTransitionDuration: DefaultConfig.transitionMoveClass,
+      animationTransitionDuration: DefaultConfig.animation.move,
       stackFromTopOptions: StackFromTopOptions,
       stackFromTop: DefaultConfig.stackFromTop,
       canBeRemovedOptions: CanBeRemovedOptions,
@@ -203,13 +203,18 @@ export default {
       conf.duration = parseInt(this.notificationDuration);
       conf.stackFromTop = Utils.toBool(this.stackFromTop);
       conf.cssFramework = this.cssFramework;
-      if (this.iconLibrary !== "none") conf.iconLibrary = this.iconLibrary;
-      conf.transitionEnterActiveClass = this.animationEnter;
-      conf.transitionLeaveActiveClass = this.animationLeave;
-      conf.transitionMoveClass = this.animationTransitionDuration;
+
+      const animationConf = {};
+      animationConf.enterActive = this.animationEnter;
+      animationConf.leaveActive = this.animationLeave;
+      animationConf.move = this.animationTransitionDuration;
+      conf.animation = animationConf;
 
       const notificationConf = {};
       notificationConf.canBeRemoved = Utils.toBool(this.canBeRemoved);
+      if (this.iconLibrary !== "none") {
+        notificationConf.iconLibrary = this.iconLibrary;
+      }
       conf.notification = notificationConf;
 
       return conf;

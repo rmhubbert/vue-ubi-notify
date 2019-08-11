@@ -2,14 +2,14 @@
   <div :class="cssClass" :style="inlineCss" ref="root">
     <transition-group
       appear
-      :name="transitionName"
-      :enter-class="transitionEnterClass"
-      :enter-active-class="transitionEnterActiveClass"
-      :enter-to-class="transitionEnterToClass"
-      :leave-class="transitionLeaveClass"
-      :leave-active-class="transitionLeaveActiveClass"
-      :leave-to-class="transitionLeaveToClass"
-      :move-class="transitionMoveClass"
+      :name="animation.name"
+      :enter-class="animation.enter"
+      :enter-active-class="animation.enterActive"
+      :enter-to-class="animation.enterTo"
+      :leave-class="animation.leave"
+      :leave-active-class="animation.leaveActive"
+      :leave-to-class="animation.leaveTo"
+      :move-class="animation.move"
       tag="div"
     >
       <div v-for="notify in notifications" :key="notify.id">
@@ -83,40 +83,12 @@ export default {
         return DefaultConfig.notification;
       }
     },
-    transitionEnterClass: {
-      type: String,
+    animation: {
+      type: Object,
       required: false,
-      default: DefaultConfig.transitionEnterClass
-    },
-    transitionEnterActiveClass: {
-      type: String,
-      required: false,
-      default: DefaultConfig.transitionEnterActiveClass
-    },
-    transitionEnterToClass: {
-      type: String,
-      required: false,
-      default: DefaultConfig.transitionEnterToClass
-    },
-    transitionLeaveClass: {
-      type: String,
-      required: false,
-      default: DefaultConfig.transitionLeaveClass
-    },
-    transitionLeaveActiveClass: {
-      type: String,
-      required: false,
-      default: DefaultConfig.transitionLeaveActiveClass
-    },
-    transitionLeaveToClass: {
-      type: String,
-      required: false,
-      default: DefaultConfig.transitionLeaveToClass
-    },
-    transitionMoveClass: {
-      type: String,
-      required: false,
-      default: DefaultConfig.transitionMoveClass
+      default() {
+        return DefaultConfig.animation;
+      }
     }
   },
 

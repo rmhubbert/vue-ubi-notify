@@ -8,14 +8,16 @@ export default {
   stackFromTop: true,
   defaultNotificationType: "default",
 
-  transitionName: "ubi-notify-transition",
-  transitionEnterClass: "ubi-notify-transition-enter",
-  transitionEnterActiveClass: "ubi-notify-transition-fade-in",
-  transitionEnterToClass: "ubi-notify-transition-enter-to",
-  transitionLeaveClass: "ubi-notify-transition-leave",
-  transitionLeaveActiveClass: "ubi-notify-transition-fade-out",
-  transitionLeaveToClass: "ubi-notify-transition-leave-to",
-  transitionMoveClass: "ubi-notify-transition-move-7",
+  animation: {
+    name: "ubi-notify-transition",
+    enter: "ubi-notify-transition-enter",
+    enterActive: "ubi-notify-transition-fade-in",
+    enterTo: "ubi-notify-transition-enter-to",
+    leave: "ubi-notify-transition-leave",
+    leaveActive: "ubi-notify-transition-fade-out",
+    leaveTo: "ubi-notify-transition-leave-to",
+    move: "ubi-notify-transition-move-7"
+  },
 
   notification: {
     canBeRemoved: true,
