@@ -9,8 +9,8 @@
             <div class="ubi-container">
               <DemoSelect
                 v-model="notificationPosition"
-                :cssFramework="this.cssFramework"
-                :options="this.notificationPositions"
+                :cssFramework="cssFramework"
+                :options="notificationPositions"
                 label="Position"
               >
                 ></DemoSelect
@@ -18,18 +18,27 @@
 
               <DemoSelect
                 v-model="notificationDuration"
-                :cssFramework="this.cssFramework"
-                :options="this.notificationDurations"
+                :cssFramework="cssFramework"
+                :options="notificationDurations"
                 label="Duration"
               >
                 ></DemoSelect
               >
 
               <DemoSelect
+                v-model="stackFromTop"
+                :cssFramework="cssFramework"
+                :options="stackFromTopOptions"
+                label="Stack from"
+              >
+                ></DemoSelect
+              >
+
+              <DemoSelect
                 v-model="notificationType"
-                :cssFramework="this.cssFramework"
-                :options="this.notificationTypes"
-                label="Type"
+                :cssFramework="cssFramework"
+                :options="notificationTypes"
+                label="Notification Type"
               >
                 ></DemoSelect
               >
@@ -38,8 +47,8 @@
             <div class="ubi-container">
               <DemoSelect
                 v-model="cssFramework"
-                :cssFramework="this.cssFramework"
-                :options="this.cssFrameworks"
+                :cssFramework="cssFramework"
+                :options="cssFrameworks"
                 label="CSS Framework"
                 @change="swapCssFramework"
               >
@@ -48,8 +57,8 @@
 
               <DemoSelect
                 v-model="iconLibrary"
-                :cssFramework="this.cssFramework"
-                :options="this.iconLibraries"
+                :cssFramework="cssFramework"
+                :options="iconLibraries"
                 label="Icon Library"
               >
                 ></DemoSelect
@@ -57,14 +66,44 @@
 
               <DemoSelect
                 v-model="animationLibrary"
-                :cssFramework="this.cssFramework"
-                :options="this.animationLibraries"
+                :cssFramework="cssFramework"
+                :options="animationLibraries"
                 label="Animation Library"
                 @change="swapAnimationLibrary"
               >
                 ></DemoSelect
               >
             </div>
+
+            <div class="ubi-container">
+              <DemoSelect
+                v-model="animationEnter"
+                :cssFramework="cssFramework"
+                :options="activeEnterAnimationLibrary"
+                label="Entrance Animation"
+              >
+                ></DemoSelect
+              >
+
+              <DemoSelect
+                v-model="animationLeave"
+                :cssFramework="cssFramework"
+                :options="activeLeaveAnimationLibrary"
+                label="Exit Animation"
+              >
+                ></DemoSelect
+              >
+
+              <DemoSelect
+                v-model="animationTransitionDuration"
+                :cssFramework="cssFramework"
+                :options="animationTransitionDurations"
+                label="Stacking Insert Duration"
+              >
+                ></DemoSelect
+              >
+            </div>
+
             <div class="ubi-container-centered">
               <DemoButton
                 @click.prevent="sendNotification"
@@ -97,6 +136,7 @@ Vue.use(UbiNotify, UbiNotifyConfig);
 
 <script>
 import UbiNotify from "../components/UbiNotify";
+import Utils from "../utils";
 import DefaultConfig from "../configs/Default";
 import DemoSelect from "./components/DemoSelect";
 import DemoButton from "./components/DemoButton";
@@ -108,6 +148,8 @@ import AnimationLibraries from "./data/animationLibraries";
 import NotificationTypes from "./data/notificationTypes";
 import NotificationPositions from "./data/notificationPositions";
 import NotificationDurations from "./data/notificationDurations";
+import AnimationTransitionDurations from "./data/animationTransitionDuration";
+import StackFromTopOptions from "./data/stackFromTop.js";
 
 export default {
   name: "",
@@ -132,7 +174,13 @@ export default {
       iconLibraries: IconLibraries,
       iconLibrary: "none",
       animationLibraries: AnimationLibraries,
-      animationLibrary: "ubianimate"
+      animationLibrary: "ubianimate",
+      animationEnter: DefaultConfig.transitionEnterActiveClass,
+      animationLeave: DefaultConfig.transitionLeaveActiveClass,
+      animationTransitionDurations: AnimationTransitionDurations,
+      animationTransitionDuration: DefaultConfig.transitionMoveClass,
+      stackFromTopOptions: StackFromTopOptions,
+      stackFromTop: DefaultConfig.stackFromTop
     };
   },
   computed: {
@@ -141,11 +189,28 @@ export default {
       conf.name = this.demoName;
       conf.position = this.notificationPosition;
       conf.duration = parseInt(this.notificationDuration);
+      conf.stackFromTop = Utils.toBool(this.stackFromTop);
       conf.cssFramework = this.cssFramework;
-      conf.animationLibrary = this.animationLibrary;
       if (this.iconLibrary !== "none") conf.iconLibrary = this.iconLibrary;
+      conf.transitionEnterActiveClass = this.animationEnter;
+      conf.transitionLeaveActiveClass = this.animationLeave;
+      conf.transitionMoveClass = this.animationTransitionDuration;
 
       return conf;
+    },
+
+    activeEnterAnimationLibrary() {
+      return this.activeAnimationLibrary.enterAnimations;
+    },
+
+    activeLeaveAnimationLibrary() {
+      return this.activeAnimationLibrary.leaveAnimations;
+    },
+
+    activeAnimationLibrary() {
+      return this.animationLibraries.find(lib => {
+        return lib.id === this.animationLibrary;
+      });
     }
   },
 
@@ -172,6 +237,8 @@ export default {
         return lib.id === this.animationLibrary;
       });
       document.getElementById("remote-animation").href = animLib.url;
+      this.animationEnter = animLib.enterAnimations[0].id;
+      this.animationLeave = animLib.leaveAnimations[0].id;
     }
   },
 

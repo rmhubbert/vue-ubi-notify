@@ -45,6 +45,19 @@ const Util = {
         return word.replace(word[0], word[0].toUpperCase());
       })
       .join("");
+  },
+
+  /**
+   * Converts a value to a boolean
+   * @param  {Mixed} value
+   * @return {Boolean}
+   */
+  toBool: value => {
+    if (typeof value === "string") {
+      if (value.toLowerCase() === "true") return true;
+      else return false;
+    }
+    return value;
   }
 };
 

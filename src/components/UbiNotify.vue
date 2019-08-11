@@ -61,10 +61,10 @@ export default {
       required: false,
       default: DefaultConfig.duration
     },
-    reverse: {
+    stackFromTop: {
       type: Boolean,
       required: false,
-      default: DefaultConfig.reverse
+      default: DefaultConfig.stackFromTop
     },
     defaultNotificationType: {
       type: String,
@@ -142,9 +142,9 @@ export default {
           type: type ? type : this.defaultNotificationType,
           duration: duration ? duration : this.duration
         };
-        this.reverse
-          ? this.notifications.push(notification)
-          : this.notifications.unshift(notification);
+        this.stackFromTop
+          ? this.notifications.unshift(notification)
+          : this.notifications.push(notification);
         this.sleepThenCall(notification.duration, this.removeNotification, [
           notification.id
         ]);

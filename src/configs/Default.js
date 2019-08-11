@@ -5,17 +5,17 @@ export default {
   width: "",
   parentNode: null,
   duration: 5000,
-  reverse: false,
+  stackFromTop: true,
   defaultNotificationType: "default",
 
   transitionName: "ubi-notify-transition",
   transitionEnterClass: "ubi-notify-transition-enter",
-  transitionEnterActiveClass: "ubi-notify-transition-enter-active",
+  transitionEnterActiveClass: "ubi-notify-transition-fade-in",
   transitionEnterToClass: "ubi-notify-transition-enter-to",
   transitionLeaveClass: "ubi-notify-transition-leave",
-  transitionLeaveActiveClass: "ubi-notify-transition-leave-active",
+  transitionLeaveActiveClass: "ubi-notify-transition-fade-out",
   transitionLeaveToClass: "ubi-notify-transition-leave-to",
-  transitionMoveClass: "ubi-notify-transition-move",
+  transitionMoveClass: "ubi-notify-transition-move-7",
 
   notification: {
     clickToRemove: true,

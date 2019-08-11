@@ -1,5 +1,13 @@
 export default [
   {
+    id: 1000,
+    name: "1 sec"
+  },
+  {
+    id: 2000,
+    name: "2 secs"
+  },
+  {
     id: 3000,
     name: "3 secs"
   },
