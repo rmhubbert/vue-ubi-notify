@@ -232,7 +232,7 @@ export default {
 
   methods: {
     sendNotification() {
-      if (this.quotes.length === 0) this.initQuotes();
+      if (this.quotes.length <= 1) this.initQuotes();
       const quote = this.quotes.pop();
       this.$notify(
         quote.quote,
@@ -259,7 +259,7 @@ export default {
     },
 
     initQuotes() {
-      this.quotes = Quotes;
+      this.quotes = Quotes.slice(); // We want a copy, not a reference
       this.quotes.sort(() => Math.random() - 0.5);
     }
   },
