@@ -156,39 +156,39 @@ button.ubi-notify-button {
   letter-spacing: 0.12em;
 }
 
-.ubi-notify-bulma {
-  .notification {
-    padding: 0.7rem;
-    font-size: 0.8rem;
+.ubi-notify-bulma.notification {
+  padding: 0.7rem;
+  font-size: 1rem;
+  margin: 1rem;
 
-    .title {
-      font-size: 1em;
-      margin: 0;
-    }
+  .title {
+    font-size: 0.9em;
+    margin: 0;
+  }
 
-    .content {
-      font-size: 0.9em;
-      line-height: 1.3em;
-      margin-top: 0.2rem;
-      margin-bottom: 0;
-    }
+  .content {
+    font-size: 0.8em;
+    line-height: 1.3em;
+    margin-top: 0.2rem;
+    margin-bottom: 0;
   }
 }
 
-.ubi-notify-bootstrap {
-  .toast {
-    line-height: 1;
-    font-size: 0.9rem;
-    margin: 0;
+.ubi-notify-bootstrap.toast {
+  line-height: 1;
+  font-size: 0.9rem;
+  margin: 1rem;
 
-    .toast-header {
-      font-size: 1em;
-    }
+  .toast-header {
+    font-size: 1em;
+    margin-bottom: 0;
+  }
 
-    .toast-body {
-      font-size: 0.9em;
-      line-height: 1.4em;
-    }
+  .toast-body {
+    font-size: 0.9em;
+    line-height: 1.4em;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
   }
 }
 
@@ -196,6 +196,7 @@ button.ubi-notify-button {
   line-height: 1;
   font-size: 1rem;
   margin: 1rem;
+  padding: 0.7rem;
 
   .toast-header {
     font-size: 1em;
@@ -210,8 +211,12 @@ button.ubi-notify-button {
 }
 
 .ubi-notify-semantic-ui {
+  margin: 1rem;
   .message {
+    padding-left: 1rem;
+
     .header {
+      margin-bottom: 0.3rem;
     }
 
     .content {
