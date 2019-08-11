@@ -18,7 +18,7 @@ export default {
   transitionMoveClass: "ubi-notify-transition-move-7",
 
   notification: {
-    clickToRemove: true,
+    canBeRemoved: true,
     iconLibrary: "none",
     icons: {
       default: "",

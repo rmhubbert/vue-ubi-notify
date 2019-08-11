@@ -1,8 +1,5 @@
 <template>
-  <div
-    :class="`ubi-notify-notification ${notificationType}`"
-    @click="$emit('remove', notification.id)"
-  >
+  <div :class="`ubi-notify-notification ${notificationType}`" @click="remove()">
     <div class="ubi-notify-notification-heading" v-if="notification.heading">
       <p>{{ notification.heading }}</p>
     </div>

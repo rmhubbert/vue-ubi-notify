@@ -1,14 +1,7 @@
 <template>
-  <div
-    :class="`ubi-notify-semantic-ui`"
-    @click="$emit('remove', notification.id)"
-  >
+  <div :class="`ubi-notify-semantic-ui`">
     <div :class="`ui message ${notificationType}`">
-      <i
-        class="close icon"
-        @click="$emit('remove', notification.id)"
-        v-show="this.clickToRemove"
-      ></i>
+      <i class="close icon" @click="remove()" v-show="this.canBeRemoved"></i>
       <div class="header" v-if="notification.heading">
         {{ notification.heading }}
       </div>

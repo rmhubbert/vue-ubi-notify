@@ -1,8 +1,5 @@
 <template>
-  <div
-    :class="`ubi-notify-materialize toast`"
-    @click="$emit('remove', notification.id)"
-  >
+  <div :class="`ubi-notify-materialize toast`" @click="remove()">
     <div class="toast-header" v-if="notification.heading">
       {{ notification.heading }}
     </div>

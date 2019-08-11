@@ -2,8 +2,8 @@
   <article :class="`ubi-notify-bulma notification ${notificationType}`">
     <button
       class="delete"
-      @click="$emit('remove', notification.id)"
-      v-show="this.clickToRemove"
+      @click="remove()"
+      v-show="this.canBeRemoved"
     ></button>
     <p class="title" v-if="notification.heading">
       {{ notification.heading }}

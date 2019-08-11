@@ -2,7 +2,7 @@
   <div :class="`ubi-notify-bootstrap toast show`">
     <div
       class="toast-header"
-      v-show="notification.heading || this.clickToRemove"
+      v-show="notification.heading || this.canBeRemoved"
     >
       <span
         :class="
@@ -18,8 +18,8 @@
         class="ml-2 mb-1 close"
         data-dismiss="toast"
         aria-label="Close"
-        @click="$emit('remove', notification.id)"
-        v-show="this.clickToRemove"
+        @click="remove()"
+        v-show="this.canBeRemoved"
       >
         <span aria-hidden="true">&times;</span>
       </button>

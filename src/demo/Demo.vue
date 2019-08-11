@@ -29,7 +29,16 @@
                 v-model="stackFromTop"
                 :cssFramework="cssFramework"
                 :options="stackFromTopOptions"
-                label="Stack from"
+                label="Insert into stack from"
+              >
+                ></DemoSelect
+              >
+
+              <DemoSelect
+                v-model="canBeRemoved"
+                :cssFramework="cssFramework"
+                :options="canBeRemovedOptions"
+                label="User can dismiss"
               >
                 ></DemoSelect
               >
@@ -150,6 +159,7 @@ import NotificationPositions from "./data/notificationPositions";
 import NotificationDurations from "./data/notificationDurations";
 import AnimationTransitionDurations from "./data/animationTransitionDuration";
 import StackFromTopOptions from "./data/stackFromTop.js";
+import CanBeRemovedOptions from "./data/canBeRemoved.js";
 
 export default {
   name: "",
@@ -161,7 +171,7 @@ export default {
   },
   data() {
     return {
-      quotes: Quotes,
+      quotes: [],
       demoName: "CHANGE_THIS_TO_A_UNIQUE_STRING",
       notificationPositions: NotificationPositions,
       notificationPosition: DefaultConfig.position,
@@ -180,7 +190,9 @@ export default {
       animationTransitionDurations: AnimationTransitionDurations,
       animationTransitionDuration: DefaultConfig.transitionMoveClass,
       stackFromTopOptions: StackFromTopOptions,
-      stackFromTop: DefaultConfig.stackFromTop
+      stackFromTop: DefaultConfig.stackFromTop,
+      canBeRemovedOptions: CanBeRemovedOptions,
+      canBeRemoved: DefaultConfig.notification.canBeRemoved
     };
   },
   computed: {
@@ -195,6 +207,10 @@ export default {
       conf.transitionEnterActiveClass = this.animationEnter;
       conf.transitionLeaveActiveClass = this.animationLeave;
       conf.transitionMoveClass = this.animationTransitionDuration;
+
+      const notificationConf = {};
+      notificationConf.canBeRemoved = Utils.toBool(this.canBeRemoved);
+      conf.notification = notificationConf;
 
       return conf;
     },
@@ -216,6 +232,7 @@ export default {
 
   methods: {
     sendNotification() {
+      if (this.quotes.length === 0) this.initQuotes();
       const quote = this.quotes.pop();
       this.$notify(
         quote.quote,
@@ -239,12 +256,16 @@ export default {
       document.getElementById("remote-animation").href = animLib.url;
       this.animationEnter = animLib.enterAnimations[0].id;
       this.animationLeave = animLib.leaveAnimations[0].id;
+    },
+
+    initQuotes() {
+      this.quotes = Quotes;
+      this.quotes.sort(() => Math.random() - 0.5);
     }
   },
 
   created() {
-    // randomize the quotes
-    this.quotes.sort(() => Math.random() - 0.5);
+    this.initQuotes();
   }
 };
 </script>

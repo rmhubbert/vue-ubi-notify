@@ -10,7 +10,7 @@ export default {
       type: Object,
       required: true
     },
-    clickToRemove: {
+    canBeRemoved: {
       type: Boolean,
       required: false,
       default: true
@@ -23,6 +23,12 @@ export default {
     icons: {
       type: Object,
       required: false
+    }
+  },
+
+  methods: {
+    remove() {
+      if (this.canBeRemoved) this.$emit("remove", this.notification.id);
     }
   }
 };
