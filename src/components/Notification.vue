@@ -14,6 +14,15 @@ export default {
       type: Boolean,
       required: false,
       default: true
+    },
+    iconLibrary: {
+      type: String,
+      required: false,
+      default: "none"
+    },
+    icons: {
+      type: Object,
+      required: false
     }
   }
 };

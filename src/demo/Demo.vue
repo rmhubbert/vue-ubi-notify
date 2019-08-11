@@ -97,6 +97,7 @@ Vue.use(UbiNotify, UbiNotifyConfig);
 
 <script>
 import UbiNotify from "../components/UbiNotify";
+import DefaultConfig from "../configs/Default";
 import DemoSelect from "./components/DemoSelect";
 import DemoButton from "./components/DemoButton";
 import UbiConfigViewer from "./components/UbiConfigViewer";
@@ -115,14 +116,12 @@ export default {
     DemoButton,
     UbiConfigViewer
   },
-  mixins: [],
-  props: {},
   data() {
     return {
       quotes: [],
       demoName: "CHANGE_THIS_TO_A_UNIQUE_STRING",
       notificationPositions: NotificationPositions,
-      notificationPosition: "top right",
+      notificationPosition: DefaultConfig.position,
       notificationDurations: NotificationDurations,
       notificationDuration: 5000,
       notificationTypes: NotificationTypes,
@@ -189,9 +188,7 @@ export default {
 
   created() {
     this.loadQuotes();
-  },
-
-  mounted() {}
+  }
 };
 </script>
 

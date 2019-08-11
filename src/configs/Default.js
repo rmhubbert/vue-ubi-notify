@@ -1,5 +1,5 @@
 export default {
-  name: "default",
+  name: "tE60Se3iNhX0SVmWVREf",
   cssFramework: "default",
   position: "top right",
   width: "",
@@ -18,6 +18,14 @@ export default {
   transitionMoveClass: "ubi-notify-transition-move",
 
   notification: {
-    clickToRemove: true
+    clickToRemove: true,
+    iconLibrary: "none",
+    icons: {
+      default: "",
+      primary: "",
+      success: "",
+      warning: "",
+      danger: ""
+    }
   }
 };
