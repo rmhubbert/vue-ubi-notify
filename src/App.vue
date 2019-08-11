@@ -645,16 +645,16 @@ label, button {
 
 select.ubi-notify-select {
   display: block;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-family: sans-serif;
   font-weight: normal;
   color: #444;
-  line-height: 1.3;
+  line-height: 1.1;
   padding: .6em 1.4em .5em .8em;
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  margin: 0.6rem 0 0 0;
+  margin: 0.4rem 0 0 0;
   border: 1px solid #ccc;
   box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
   border-radius: .5em;

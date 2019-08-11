@@ -1,29 +1,35 @@
 <script>
 export default {
   computed: {
-    compCssClass() {
+    inlineCss() {
+      return this.calcInlineCss();
+    },
+
+    cssClass() {
       const position = this.position.replace(" ", "-");
       return `ubi-notify-root ubi-notify-root-${position}`;
-    },
-    useInlinePosition() {
+    }
+  },
+
+  methods: {
+    useInlineCssPosition() {
       return (
         this.position.search(":") !== -1 ||
         this.position.toLowerCase().search("center") !== -1
       );
     },
+
     useInlineWidth() {
       return this.width !== "";
-    }
-  },
+    },
 
-  methods: {
     calcInlineCss() {
       let css = "";
-      if (this.useInlinePosition) {
+      if (this.useInlineCssPosition()) {
         css += this.calcPosition() + " ";
       }
-      if (this.useInlineWidth) css += `width: ${this.width};`;
-      this.inlineCss = css;
+      if (this.useInlineWidth()) css += `width: ${this.width};`;
+      return css;
     },
 
     calcPosition() {
@@ -35,9 +41,7 @@ export default {
         } else if (word === "center") {
           if (index === 0) {
             // vertically center
-            let height = null;
-            if (this.useInlineheight) height = this.height;
-            else height = getComputedStyle(this.$refs["root"]).height;
+            let height = getComputedStyle(this.$refs["root"]).height;
             const numericHeight = parseFloat(height.match(/[\d.]+/));
             const heightType = height.replace(/[\d.]+/, "");
             const marginTop = `-${numericHeight / 2}${heightType}`;
@@ -45,8 +49,7 @@ export default {
           } else if (index === 1) {
             // horizontally center
             let width = null;
-            if (this.useInlineWidth) width = this.width;
-            else width = getComputedStyle(this.$refs["root"]).width;
+            width = getComputedStyle(this.$refs["root"]).width;
             const numericWidth = parseFloat(width.match(/[\d.]+/));
             const widthType = width.replace(/[\d.]+/, "");
             const marginLeft = `-${numericWidth / 2}${widthType}`;

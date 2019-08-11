@@ -16,6 +16,13 @@ const UbiNotify = {
     // Add the notify method to the Vue instance
     Vue.prototype.$notify = UbiNotify.notify;
 
+    // Add the register method to the Vue instance.
+    // This lets components register themselves
+    Vue.prototype.$UbiNotifyRegister = UbiNotify.registerComponent;
+
+    // Add the notifiers registry to the Vue instance
+    //Vue.prototype.$UbiNotifyRegistry = UbiNotify.notifiers;
+
     // Initialise the options then create and add our components
     UbiNotify.init(Vue, UbiNotifyComponent, options);
   },
@@ -32,7 +39,7 @@ const UbiNotify = {
           componentObject,
           optionObject
         );
-        UbiNotify.notifiers.push(component);
+        //UbiNotify.registerComponent(component);
         UbiNotify.mountComponent(component, optionObject.parentNode);
       }
     });
@@ -68,6 +75,10 @@ const UbiNotify = {
     );
   },
 
+  registerComponent: component => {
+    UbiNotify.notifiers.push(component);
+  },
+
   mountComponent: (component, node = null) => {
     if (!node) node = document.body.appendChild(document.createElement("div"));
     else {
@@ -75,7 +86,7 @@ const UbiNotify = {
         .getElementById(node)
         .appendChild(document.createElement("div"));
     }
-    node.className = "ubi-notify-root";
+    node.className = "ubi-notify-wrapper";
     return component.$mount(node);
   },
 

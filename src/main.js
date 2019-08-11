@@ -1,3 +1,4 @@
+/*
 const uri = window.location.search.substring(1);
 const params = new URLSearchParams(uri);
 let cssFramework = "default";
@@ -17,20 +18,6 @@ if (
   reverse = true;
 }
 
-window.axios = require("axios");
-
-import Vue from "vue";
-import App from "./App.vue";
-
-Vue.config.productionTip = false;
-
-import UbiNotify from "./index.js";
-/*
-const config = {
-  name: "config",
-  cssFramework: cssFramework
-};
-*/
 const config = {
   name: "config",
   reverse: reverse,
@@ -41,11 +28,18 @@ const config = {
   transitionEnterActiveClass: animEnter,
   transitionLeaveActiveClass: animLeave
 };
+*/
 
-//console.log(config);
+window.axios = require("axios");
 
-Vue.use(UbiNotify, [config]);
+import Vue from "vue";
+import Demo from "./demo/Demo.vue";
+
+Vue.config.productionTip = false;
+
+import UbiNotify from "./index.js";
+Vue.use(UbiNotify);
 
 new Vue({
-  render: h => h(App)
+  render: h => h(Demo)
 }).$mount("#app");

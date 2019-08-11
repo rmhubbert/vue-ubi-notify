@@ -1,5 +1,5 @@
 <template>
-  <div :class="compCssClass" :style="inlineCss" ref="root">
+  <div :class="cssClass" :style="inlineCss" ref="root">
     <transition-group
       appear
       :name="transitionName"
@@ -14,7 +14,7 @@
     >
       <div v-for="notify in notifications" :key="notify.id">
         <component
-          :is="notificationComponent"
+          :is="notificationComponent()"
           v-bind="notification"
           :notification="notify"
           @remove="manuallyRemoveNotification"
@@ -124,25 +124,11 @@ export default {
     return {
       notifications: [],
       count: 0,
-      useInlineCss: false,
-      inlineCss: "",
-      componentImportPath: "./"
+      useInlineCss: false
     };
   },
 
-  computed: {
-    notificationComponent() {
-      const notificationComponentName = `${Utils.toPascalCase(
-        this.cssFramework
-      )}Notification`;
-      return this.getComponent(
-        notificationComponentName,
-        this.componentImportPath,
-        notificationComponentName + ".vue"
-      );
-      //return notificationComponentName;
-    }
-  },
+  computed: {},
 
   methods: {
     addNotification(body, heading = null, type = null, duration = null) {
@@ -174,9 +160,19 @@ export default {
       this.removeNotification(id);
     },
 
+    notificationComponent() {
+      return this.getComponent(
+        `${Utils.toPascalCase(this.cssFramework)}Notification`
+      );
+    },
+
     onResize() {
       this.calcInlineCss();
     }
+  },
+
+  created() {
+    this.$UbiNotifyRegister(this);
   },
 
   mounted() {
