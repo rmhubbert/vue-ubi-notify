@@ -124,7 +124,8 @@ export default {
     return {
       notifications: [],
       count: 0,
-      useInlineCss: false
+      useInlineCss: false,
+      componentImportPath: "./notifications/"
     };
   },
 

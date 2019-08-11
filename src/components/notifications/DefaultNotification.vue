@@ -28,5 +28,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../assets/scss/DefaultNotification.scss";
+@import "../../assets/scss/DefaultNotification.scss";
 </style>
