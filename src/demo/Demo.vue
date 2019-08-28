@@ -26,6 +26,17 @@
               >
 
               <DemoSelect
+                v-model="notificationType"
+                :cssFramework="cssFramework"
+                :options="notificationTypes"
+                label="Default Type"
+              >
+                ></DemoSelect
+              >
+            </div>
+
+            <div class="ubi-container">
+              <DemoSelect
                 v-model="stackFromTop"
                 :cssFramework="cssFramework"
                 :options="stackFromTopOptions"
@@ -39,15 +50,6 @@
                 :cssFramework="cssFramework"
                 :options="canBeRemovedOptions"
                 label="User can dismiss"
-              >
-                ></DemoSelect
-              >
-
-              <DemoSelect
-                v-model="notificationType"
-                :cssFramework="cssFramework"
-                :options="notificationTypes"
-                label="Notification Type"
               >
                 ></DemoSelect
               >
@@ -178,13 +180,13 @@ export default {
       notificationDurations: NotificationDurations,
       notificationDuration: DefaultConfig.duration,
       notificationTypes: NotificationTypes,
-      notificationType: DefaultConfig.defaultNotificationType,
+      notificationType: DefaultConfig.notification.defaultType,
       cssFrameworks: CssFrameworks,
       cssFramework: DefaultConfig.cssFramework,
       iconLibraries: IconLibraries,
       iconLibrary: "none",
       animationLibraries: AnimationLibraries,
-      animationLibrary: "ubianimate",
+      animationLibrary: "default",
       animationEnter: DefaultConfig.animation.enterActive,
       animationLeave: DefaultConfig.animation.leaveActive,
       animationTransitionDurations: AnimationTransitionDurations,
@@ -212,6 +214,7 @@ export default {
 
       const notificationConf = {};
       notificationConf.canBeRemoved = Utils.toBool(this.canBeRemoved);
+      notificationConf.defaultType = this.notificationType;
       if (this.iconLibrary !== "none") {
         notificationConf.iconLibrary = this.iconLibrary;
       }

@@ -10,6 +10,11 @@ export default {
       type: Object,
       required: true
     },
+    defaultType: {
+      type: String,
+      required: false,
+      default: "default"
+    },
     canBeRemoved: {
       type: Boolean,
       required: false,

@@ -93,7 +93,7 @@ const UbiNotify = {
   notify: (
     messageBody,
     messageHeading = null,
-    messageType = "standard",
+    messageType = null,
     componentName = null,
     duration = null
   ) => {

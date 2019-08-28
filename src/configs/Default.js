@@ -6,7 +6,6 @@ export default {
   parentNode: null,
   duration: 5000,
   stackFromTop: true,
-  defaultNotificationType: "default",
 
   animation: {
     name: "ubi-notify-transition",
@@ -20,6 +19,7 @@ export default {
   },
 
   notification: {
+    defaultType: "danger",
     canBeRemoved: true,
     iconLibrary: "none",
     icons: {

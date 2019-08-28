@@ -66,11 +66,6 @@ export default {
       required: false,
       default: DefaultConfig.stackFromTop
     },
-    defaultNotificationType: {
-      type: String,
-      required: false,
-      default: DefaultConfig.defaultNotificationType
-    },
     transitionName: {
       type: String,
       required: false,
@@ -111,7 +106,7 @@ export default {
           id: this.count++,
           heading: heading,
           body: body,
-          type: type ? type : this.defaultNotificationType,
+          type: type ? type : this.notification.defaultType,
           duration: duration ? duration : this.duration
         };
         this.stackFromTop

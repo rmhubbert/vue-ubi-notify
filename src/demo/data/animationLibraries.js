@@ -1,3 +1,5 @@
+import DefaultEnter from "./animations/defaultEnter.js";
+import DefaultLeave from "./animations/defaultLeave.js";
 import UbiAnimateEnter from "./animations/ubianimateEnter.js";
 import UbiAnimateLeave from "./animations/ubianimateLeave.js";
 import AnimateCssEnter from "./animations/animateCssEnter.js";
@@ -5,9 +7,17 @@ import AnimateCssLeave from "./animations/animateCssLeave.js";
 
 export default [
   {
+    id: "default",
+    name: "Default",
+    url: "",
+    enterAnimations: DefaultEnter,
+    leaveAnimations: DefaultLeave
+  },
+  {
     id: "ubianimate",
     name: "UbiAnimate",
-    url: "",
+    url:
+      "https://cdn.jsdelivr.net/gh/rmhubbert/ubi-animate@0.1.2/dist/ubianimate.min.css",
     enterAnimations: UbiAnimateEnter,
     leaveAnimations: UbiAnimateLeave
   },
