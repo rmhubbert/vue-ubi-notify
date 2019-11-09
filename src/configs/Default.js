@@ -19,7 +19,7 @@ export default {
   },
 
   notification: {
-    defaultType: "danger",
+    defaultType: "primary",
     canBeRemoved: true,
     iconLibrary: "none",
     icons: {
