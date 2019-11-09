@@ -22,7 +22,7 @@ body {
 }
 
 #content {
-  width: 50%;
+  width: 90%;
   text-align: center;
   line-height: 1.5em;
   font-size: 1rem;
@@ -48,7 +48,7 @@ body {
 }
 
 h1.title {
-  font-size: 4rem;
+  font-size: 2rem;
   font-weight: normal;
   letter-spacing: 0.2rem;
 }
@@ -226,5 +226,15 @@ button.ubi-notify-button {
 
     .content {
     }
+  }
+}
+
+@media only screen and (min-width: 820px) {
+  h1.title {
+    font-size: 3rem;
+  }
+
+  #content {
+    width: 60%;
   }
 }
