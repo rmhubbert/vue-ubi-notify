@@ -17,7 +17,7 @@ export default [
     id: "ubianimate",
     name: "UbiAnimate",
     url:
-      "https://cdn.jsdelivr.net/gh/rmhubbert/ubi-animate@0.1.2/dist/ubianimate.min.css",
+      "https://cdn.jsdelivr.net/npm/ubi-animate@0.2.1/dist/ubianimate.min.css",
     enterAnimations: UbiAnimateEnter,
     leaveAnimations: UbiAnimateLeave
   },
