@@ -1,6 +1,6 @@
-## Vue-UbiNotify
+## Vue-Ubi-Notify
 
-A toast / snackbar / notification plugin for Vue 2.6+ with built in support for Bootstrap, Bulma, Materialize, Semantic UI & TailwindCSS.
+A toast / snackbar / notification plugin for Vue 2.6+ with built in support for Bootstrap, Bulma, MaterializeCSS, Semantic UI & TailwindCSS.
 
 ## Installation
 
