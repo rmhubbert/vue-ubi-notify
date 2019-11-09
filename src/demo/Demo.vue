@@ -12,27 +12,21 @@
                 :cssFramework="cssFramework"
                 :options="notificationPositions"
                 label="Position"
-              >
-                ></DemoSelect
-              >
+              >></DemoSelect>
 
               <DemoSelect
                 v-model="notificationDuration"
                 :cssFramework="cssFramework"
                 :options="notificationDurations"
                 label="Duration"
-              >
-                ></DemoSelect
-              >
+              >></DemoSelect>
 
               <DemoSelect
                 v-model="notificationType"
                 :cssFramework="cssFramework"
                 :options="notificationTypes"
                 label="Default Type"
-              >
-                ></DemoSelect
-              >
+              >></DemoSelect>
             </div>
 
             <div class="ubi-container">
@@ -41,18 +35,14 @@
                 :cssFramework="cssFramework"
                 :options="stackFromTopOptions"
                 label="Insert into stack from"
-              >
-                ></DemoSelect
-              >
+              >></DemoSelect>
 
               <DemoSelect
                 v-model="canBeRemoved"
                 :cssFramework="cssFramework"
                 :options="canBeRemovedOptions"
                 label="User can dismiss"
-              >
-                ></DemoSelect
-              >
+              >></DemoSelect>
             </div>
 
             <div class="ubi-container">
@@ -62,18 +52,7 @@
                 :options="cssFrameworks"
                 label="CSS Framework"
                 @change="swapCssFramework"
-              >
-                ></DemoSelect
-              >
-
-              <DemoSelect
-                v-model="iconLibrary"
-                :cssFramework="cssFramework"
-                :options="iconLibraries"
-                label="Icon Library"
-              >
-                ></DemoSelect
-              >
+              >></DemoSelect>
 
               <DemoSelect
                 v-model="animationLibrary"
@@ -81,9 +60,7 @@
                 :options="animationLibraries"
                 label="Animation Library"
                 @change="swapAnimationLibrary"
-              >
-                ></DemoSelect
-              >
+              >></DemoSelect>
             </div>
 
             <div class="ubi-container">
@@ -92,35 +69,25 @@
                 :cssFramework="cssFramework"
                 :options="activeEnterAnimationLibrary"
                 label="Entrance Animation"
-              >
-                ></DemoSelect
-              >
+              >></DemoSelect>
 
               <DemoSelect
                 v-model="animationLeave"
                 :cssFramework="cssFramework"
                 :options="activeLeaveAnimationLibrary"
                 label="Exit Animation"
-              >
-                ></DemoSelect
-              >
+              >></DemoSelect>
 
               <DemoSelect
                 v-model="animationTransitionDuration"
                 :cssFramework="cssFramework"
                 :options="animationTransitionDurations"
                 label="Stacking Insert Duration"
-              >
-                ></DemoSelect
-              >
+              >></DemoSelect>
             </div>
 
             <div class="ubi-container-centered">
-              <DemoButton
-                @click.prevent="sendNotification"
-                :cssFramework="cssFramework"
-                >UbiNotify!</DemoButton
-              >
+              <DemoButton @click.prevent="sendNotification" :cssFramework="cssFramework">UbiNotify!</DemoButton>
             </div>
           </form>
         </div>
@@ -129,14 +96,11 @@
           <UbiConfigViewer :config="config">
             <!-- prettier-ignore -->
             <template v-slot:before>
-import UbiNotify from "vue-ubi-notify"; 
-
-const UbiNotifyConfig = </template>
-            <!-- prettier-ignore -->
-            <template v-slot:after>
-
-Vue.use(UbiNotify, UbiNotifyConfig);
+              import UbiNotify from "vue-ubi-notify";
+              const UbiNotifyConfig =
             </template>
+            <!-- prettier-ignore -->
+            <template v-slot:after>Vue.use(UbiNotify, UbiNotifyConfig);</template>
           </UbiConfigViewer>
         </div>
       </main>
