@@ -31,5 +31,11 @@ export default [
     id: "semantic ui",
     url:
       "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+  },
+  {
+    name: "TailwindCSS",
+    id: "tailwind",
+    url:
+      "https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.1.2/tailwind.min.css"
   }
 ];

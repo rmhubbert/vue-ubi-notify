@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="content-wrapper">
+    <div id="content-wrapper" :class="this.cssFramework">
       <main id="content">
         <h1 class="title">Vue-UbiNotify</h1>
 
@@ -12,21 +12,24 @@
                 :cssFramework="cssFramework"
                 :options="notificationPositions"
                 label="Position"
-              >></DemoSelect>
+                >></DemoSelect
+              >
 
               <DemoSelect
                 v-model="notificationDuration"
                 :cssFramework="cssFramework"
                 :options="notificationDurations"
                 label="Duration"
-              >></DemoSelect>
+                >></DemoSelect
+              >
 
               <DemoSelect
                 v-model="notificationType"
                 :cssFramework="cssFramework"
                 :options="notificationTypes"
                 label="Default Type"
-              >></DemoSelect>
+                >></DemoSelect
+              >
             </div>
 
             <div class="ubi-container">
@@ -35,14 +38,16 @@
                 :cssFramework="cssFramework"
                 :options="stackFromTopOptions"
                 label="Insert into stack from"
-              >></DemoSelect>
+                >></DemoSelect
+              >
 
               <DemoSelect
                 v-model="canBeRemoved"
                 :cssFramework="cssFramework"
                 :options="canBeRemovedOptions"
                 label="User can dismiss"
-              >></DemoSelect>
+                >></DemoSelect
+              >
             </div>
 
             <div class="ubi-container">
@@ -52,7 +57,8 @@
                 :options="cssFrameworks"
                 label="CSS Framework"
                 @change="swapCssFramework"
-              >></DemoSelect>
+                >></DemoSelect
+              >
 
               <DemoSelect
                 v-model="animationLibrary"
@@ -60,7 +66,8 @@
                 :options="animationLibraries"
                 label="Animation Library"
                 @change="swapAnimationLibrary"
-              >></DemoSelect>
+                >></DemoSelect
+              >
             </div>
 
             <div class="ubi-container">
@@ -69,25 +76,32 @@
                 :cssFramework="cssFramework"
                 :options="activeEnterAnimationLibrary"
                 label="Entrance Animation"
-              >></DemoSelect>
+                >></DemoSelect
+              >
 
               <DemoSelect
                 v-model="animationLeave"
                 :cssFramework="cssFramework"
                 :options="activeLeaveAnimationLibrary"
                 label="Exit Animation"
-              >></DemoSelect>
+                >></DemoSelect
+              >
 
               <DemoSelect
                 v-model="animationTransitionDuration"
                 :cssFramework="cssFramework"
                 :options="animationTransitionDurations"
                 label="Stacking Insert Duration"
-              >></DemoSelect>
+                >></DemoSelect
+              >
             </div>
 
             <div class="ubi-container-centered">
-              <DemoButton @click.prevent="sendNotification" :cssFramework="cssFramework">UbiNotify!</DemoButton>
+              <DemoButton
+                @click.prevent="sendNotification"
+                :cssFramework="cssFramework"
+                >UbiNotify!</DemoButton
+              >
             </div>
           </form>
         </div>
@@ -96,8 +110,8 @@
           <UbiConfigViewer :config="config">
             <!-- prettier-ignore -->
             <template v-slot:before>
-              import UbiNotify from "vue-ubi-notify";
-              const UbiNotifyConfig =
+import UbiNotify from "vue-ubi-notify";
+const UbiNotifyConfig =
             </template>
             <!-- prettier-ignore -->
             <template v-slot:after>Vue.use(UbiNotify, UbiNotifyConfig);</template>
@@ -169,6 +183,33 @@ export default {
       conf.duration = parseInt(this.notificationDuration);
       conf.stackFromTop = Utils.toBool(this.stackFromTop);
       conf.cssFramework = this.cssFramework;
+
+      if (this.cssFramework === "tailwind") {
+        const css = {};
+        css.defaultMessage =
+          "m-4 p-2 bg-gray-300 text-gray-700 rounded shadow-lg";
+        css.defaultHeading = "font-semibold text-sm";
+        css.defaultBody = "text-xs";
+        css.primaryMessage = "m-4 p-2 bg-teal-400 text-white rounded shadow-lg";
+        css.primaryHeading = "font-semibold text-sm";
+        css.primaryBody = "text-xs";
+        css.infoMessage = "m-4 p-2 bg-blue-400 text-white rounded shadow-lg";
+        css.infoHeading = "font-semibold text-sm";
+        css.infoBody = "text-xs";
+        css.successMessage =
+          "m-4 p-2 bg-green-400 text-white rounded shadow-lg";
+        css.successHeading = "font-semibold text-sm";
+        css.successBody = "text-xs";
+        css.warningMessage =
+          "m-4 p-2 bg-orange-400 text-white rounded shadow-lg";
+        css.warningHeading = "font-semibold text-sm";
+        css.warningBody = "text-xs";
+        css.dangerMessage = "m-4 p-2 bg-red-400 text-white rounded shadow-lg";
+        css.dangerHeading = "font-semibold text-sm";
+        css.dangerBody = "text-xs";
+
+        conf.css = css;
+      }
 
       const animationConf = {};
       animationConf.enterActive = this.animationEnter;

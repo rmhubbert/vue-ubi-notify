@@ -19,15 +19,37 @@ export default {
   },
 
   notification: {
-    defaultType: "primary",
+    defaultType: "default",
     canBeRemoved: true,
     iconLibrary: "none",
     icons: {
       default: "",
       primary: "",
+      info: "",
       success: "",
       warning: "",
       danger: ""
     }
+  },
+
+  css: {
+    defaultMessage: "",
+    defaultHeading: "",
+    defaultBody: "",
+    primaryMessage: "",
+    primaryHeading: "",
+    primaryBody: "",
+    infoMessage: "",
+    infoHeading: "",
+    infoBody: "",
+    successMessage: "",
+    successHeading: "",
+    successBody: "",
+    warningMessage: "",
+    warningHeading: "",
+    warningBody: "",
+    dangerMessage: "",
+    dangerHeading: "",
+    dangerBody: ""
   }
 };

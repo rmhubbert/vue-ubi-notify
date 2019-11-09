@@ -15,8 +15,7 @@
             :key="option.id"
             :value="option.id"
             :selected="option.id === value"
-            >{{ option.name }}</option
-          >
+          >{{ option.name }}</option>
         </select>
       </div>
     </div>
@@ -67,6 +66,7 @@ export default {
       else if (this.cssFramework === "bootstrap") return "custom-select";
       else if (this.cssFramework === "materialize") return "browser-default";
       else if (this.cssFramework === "semantic ui") return "semui";
+      else if (this.cssFramework === "tailwind") return "tailwind";
       return "";
     },
 
@@ -76,6 +76,7 @@ export default {
         return "select is-primary is-fullwidth";
       else if (this.cssFramework === "bootstrap") return "";
       else if (this.cssFramework === "semantic ui") return "ui form";
+      else if (this.cssFramework === "tailwind") return "tailwind";
       return "";
     },
 

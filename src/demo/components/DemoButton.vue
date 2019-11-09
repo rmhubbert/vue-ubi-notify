@@ -21,6 +21,7 @@ export default {
       else if (this.cssFramework === "bulma") return "button is-primary";
       else if (this.cssFramework === "bootstrap") return "btn btn-primary";
       else if (this.cssFramework === "semantic ui") return "ui primary button";
+      else if (this.cssFramework === "tailwind") return "tailwind";
       else if (this.cssFramework === "materialize")
         return "waves-effect waves-light btn";
       return "";

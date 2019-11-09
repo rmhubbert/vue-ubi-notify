@@ -18,6 +18,7 @@
           v-bind="notification"
           :notification="notify"
           @remove="manuallyRemoveNotification"
+          :css="css"
         />
       </div>
     </transition-group>
@@ -45,6 +46,13 @@ export default {
       type: String,
       required: false,
       default: DefaultConfig.cssFramework
+    },
+    css: {
+      type: Object,
+      required: false,
+      default() {
+        return DefaultConfig.css;
+      }
     },
     position: {
       type: String,

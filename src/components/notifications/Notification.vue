@@ -28,6 +28,10 @@ export default {
     icons: {
       type: Object,
       required: false
+    },
+    css: {
+      type: Object,
+      required: true
     }
   },
 
