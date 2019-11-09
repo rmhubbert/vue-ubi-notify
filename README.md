@@ -1,39 +1,35 @@
-# vue-ubi-notify
+## Vue-UbiNotify
 
-## Project setup
-```
-npm install
-```
+A toast / snackbar / notification plugin for Vue 2.6+ with built in support for Bootstrap, Bulma, Materialize, Semantic UI & TailwindCSS.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Installation
 
-### Compiles and minifies for production
+NPM
+
 ```
-npm run build
+npm install vue-ubinotify
 ```
 
-### Run your tests
+Yarn
+
 ```
-npm run test
+yarn add vue-ubinotify
 ```
 
-### Lints and fixes files
+## Usage
+
+The easiest way to get up and running is via the configuration builder in [the demo app](https://rmhubbert.github.io/vue-ubi-notify).
+
+Once you've done that, simply call the \$notify method from within your Vue instance.
+
+Message types can be either "default", "primary", "success", "warning" or "danger".
+
+Duration should be in milliseconds.
+
 ```
-npm run lint
+this.$notify(messageBody, messageHeading = null, messageType = null, duration = null);
 ```
 
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
+## Contributing
 
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
