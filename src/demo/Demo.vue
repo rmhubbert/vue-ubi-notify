@@ -105,17 +105,49 @@
             </div>
           </form>
         </div>
-
+        <section class="ubi-container">
+          <h2 class="text-3xl is-size-3">Installation</h2>
+          <pre>npm install ubi-vue-notify</pre>
+        </section>
         <div class="ubi-container">
+          <h2 class="text-3xl is-size-3">Configuration</h2>
+          <p>
+            Have a play with the demo above and when you've got everything set
+            up the way you like, copy and paste the following directly before
+            creating your root Vue instance.
+          </p>
+          <p>
+            Remember to install your chosen CSS animation library as well. I
+            recommend
+            <a href="https://rmhubbert.github.io/ubi-animate/">UbiAnimate</a>.
+          </p>
           <UbiConfigViewer :config="config">
             <!-- prettier-ignore -->
-            <template v-slot:before>
-import UbiNotify from "vue-ubi-notify";
+            <template v-slot:before>import UbiNotify from "vue-ubi-notify";
 const UbiNotifyConfig =
-            </template>
+</template>
             <!-- prettier-ignore -->
-            <template v-slot:after>Vue.use(UbiNotify, UbiNotifyConfig);</template>
+            <template v-slot:after>
+Vue.use(UbiNotify, UbiNotifyConfig);</template>
           </UbiConfigViewer>
+        </div>
+
+        <div class="ubi-container last">
+          <h2 class="text-3xl is-size-3">Usage</h2>
+          <p>
+            Sending a notification is as simple as calling the $notify method
+            from within your Vue instance.
+          </p>
+          <p>
+            Message types can be either "default", "primary", "success",
+            "warning" or "danger".
+          </p>
+          <p>Duration should be in milliseconds.</p>
+
+          <!-- prettier-ignore -->
+          <pre>
+this.$notify(messageBody, messageHeading = null, messageType = null, duration = null);
+</pre>
         </div>
       </main>
     </div>

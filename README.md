@@ -7,13 +7,13 @@ A toast / snackbar / notification plugin for Vue 2.6+ with built in support for 
 NPM
 
 ```
-npm install vue-ubinotify
+npm install vue-ubi-notify
 ```
 
 Yarn
 
 ```
-yarn add vue-ubinotify
+yarn add vue-ubi-notify
 ```
 
 ## Usage
