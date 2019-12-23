@@ -1,4 +1,5 @@
 import UbiNotifyComponent from "./components/UbiNotify";
+import NotificationGenerator from "./components/NotificationGenerator";
 import Util from "./utils";
 import Config from "./configs";
 
@@ -12,6 +13,9 @@ const UbiNotify = {
 
     // Register component
     Vue.component(UbiNotifyComponent.name, UbiNotifyComponent);
+
+    // Register generator component
+    Vue.component(NotificationGenerator.name, NotificationGenerator);
 
     // Add the notify method to the Vue instance
     Vue.prototype.$notify = UbiNotify.notify;

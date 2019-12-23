@@ -1,7 +1,10 @@
 <template>
-  <!-- prettier-ignore -->
   <pre>
-  <slot name="before"></slot>{{ configString }}<slot name="after"></slot>
+    <!-- prettier-ignore -->
+    <slot name="before"></slot>
+    {{ configString }}
+    <!-- prettier-ignore -->
+    <slot name="after"></slot>
   </pre>
 </template>
 

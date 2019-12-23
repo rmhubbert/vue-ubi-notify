@@ -122,13 +122,13 @@
             <a href="https://rmhubbert.github.io/ubi-animate/">UbiAnimate</a>.
           </p>
           <UbiConfigViewer :config="config">
-            <!-- prettier-ignore -->
-            <template v-slot:before>import UbiNotify from "vue-ubi-notify";
-const UbiNotifyConfig =
-</template>
-            <!-- prettier-ignore -->
+            <template v-slot:before>
+  import UbiNotify from "vue-ubi-notify";
+  const UbiNotifyConfig =
+            </template>
             <template v-slot:after>
-Vue.use(UbiNotify, UbiNotifyConfig);</template>
+  Vue.use(UbiNotify, UbiNotifyConfig);
+            </template>
           </UbiConfigViewer>
         </div>
 
